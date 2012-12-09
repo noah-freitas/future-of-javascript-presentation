@@ -5,6 +5,7 @@
 		<title>ES5 &amp; ES.Next: The Present and (Near) Future of JavaScript</title>
 		<link rel=stylesheet href=css/reveal.css>
 		<link rel=stylesheet href=css/theme/default.css>
+		<link rel=stylesheet href=lib/css/zenburn.css>
 	</head>
 	<body>
 		<div class=reveal>
@@ -81,9 +82,40 @@
 						</li>
 					</ul>
 				</section>
+				<section>
+					<h1>Data Structures</h1>
+				</section>
+				<section>
+					<hgroup>
+						<h1>Array Functions</h1>
+						<h2>Moving Beyond <code>for</code></h2>
+					</hgroup>
+				</section>
+				<section>
+					<h1>forEach</h1>
+					<p>Executes a function for each item in an array.</p>
+					<pre>
+						<code>
+var arr = [1, 2, 3];<br>
+arr.forEach(function (value, index, array) {
+    console.log(value);
+});
+
+// Logs out:
+//   1
+//   2
+//   3
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h1>Generators, Iterators, &amp; Comprehensions</h1>
+				</section>
 			</div>
 		</div>
 		<script src=js/reveal.min.js></script>
 		<script>Reveal.initialize();</script>
+		<script src=plugin/highlight/highlight.js></script>
+		<script>hljs.initHighlightingOnLoad();</script>
 	</body>
 </html>
