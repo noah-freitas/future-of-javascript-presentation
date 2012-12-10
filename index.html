@@ -448,8 +448,39 @@ printFirstName(person);  // Logs 'John'
 				<section>
     				<h1>Arrow Functions</h1>
                     <section>
-                        <p>Shortened function literal syntax, a la coffescript.</p>
+                        <ul>
+                            <li>Shortened function literal syntax, a la coffescript.</li>
+                            <li>Lexical scoping of <code>this</code>.</li>
+                        </ul>
                     </section>
+                    <section>
+                        <pre>
+                            <code>
+// tmes2 revisted
+let times2 = x => x * 2;
+
+// Lexical binding of this.
+var SlideShow = {
+  start: function () {
+    window.setTimeout(() => this.next(), 1000);
+  },
+  // rest of object...
+};
+  
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
 				</section>
 			</div>
 		</div>
