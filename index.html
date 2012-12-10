@@ -42,28 +42,7 @@
 					<h1>Topics 1</h1>
 					<ul>
 						<li>
-							Syntax Changes
-							<ul>
-								<li>Destructuring</li>
-								<li>Arrow Functions</li>
-							</ul>
-						</li>
-						<li>
-							Programming Objects
-							<ul>
-								<li>Object.create</li>
-								<li>Object. is, isnt, &amp; observe</li>
-								<li>Getters/Setters</li>
-								<li>Proxies</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section>
-					<h1>Topics 2</h1>
-					<ul>
-						<li>
-							Data Structures
+    						Data Structures
 							<ul>
 								<li>Array Functions</li>
 								<li>Generators, Iterators, &amp; Comprehensions</li>
@@ -82,6 +61,27 @@
 					</ul>
 				</section>
 				<section>
+					<h1>Topics 2</h1>
+					<ul>
+                        <li>
+    						Syntax Changes
+							<ul>
+								<li>Destructuring</li>
+								<li>Arrow Functions</li>
+							</ul>
+						</li>
+						<li>
+							Programming Objects
+							<ul>
+								<li>Object.create</li>
+								<li>Object. is, isnt, &amp; observe</li>
+								<li>Getters/Setters</li>
+								<li>Proxies</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
 					<h1>Topics 3</h1>
 					<ul>
 						<li>
@@ -94,81 +94,6 @@
 							</ul>
 						</li>
 					</ul>
-				</section>
-				<section>
-					<h1>Syntax Changes</h1>
-				</section>
-				<section>
-					<h1>Destructuring</h1>
-					<section>
-						<p>Breaks apart an array or object during assignment (or other value bindings.)</p>
-					</section>
-					<section>
-						<p>Simple swap example</p>
-						<pre>
-							<code>
-var a = 1;
-var b = 3;
-
-[a, b] = [b, a];
-
-// b is 1 and a is 3.
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Break apart a function return value</p>
-						<pre>
-							<code>
-var firstName, age;
-
-var getPerson = function () {
-  return {
-    name: {
-      first: 'John',
-      last: 'Doe'
-    },
-    age: 42
-  };
-};
-
-{ name: { first: firstName }, age: age } = getPerson();
-
-// firstName is 'John', age is 42
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Break apart a function parameter</p>
-						<pre>
-							<code>
-var person = {
-  name: {
-    first: 'John',
-    last: 'Doe'
-  },
-  age: 42
-};
-
-var printFirstName = function ({ name: { first: firstName } }) {
-  console.log(firstName);
-};
-
-printFirstName(person);  // Logs 'John'
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=partialsupport src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
 				</section>
 				<section>
 					<h1>Data Structures</h1>
@@ -444,6 +369,87 @@ print(let (a = 4) a);        // Logs 4
 							</tr>
 						</table>
 					</section>
+				</section>
+                <section>
+    				<h1>Syntax Changes</h1>
+				</section>
+				<section>
+					<h1>Destructuring</h1>
+					<section>
+						<p>Breaks apart an array or object during assignment (or other value bindings.)</p>
+					</section>
+					<section>
+						<p>Simple swap example</p>
+						<pre>
+							<code>
+var a = 1;
+var b = 3;
+
+[a, b] = [b, a];
+
+// b is 1 and a is 3.
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Break apart a function return value</p>
+						<pre>
+							<code>
+var firstName, age;
+
+var getPerson = function () {
+  return {
+    name: {
+      first: 'John',
+      last: 'Doe'
+    },
+    age: 42
+  };
+};
+
+{ name: { first: firstName }, age: age } = getPerson();
+
+// firstName is 'John', age is 42
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Break apart a function parameter</p>
+						<pre>
+							<code>
+var person = {
+  name: {
+    first: 'John',
+    last: 'Doe'
+  },
+  age: 42
+};
+
+var printFirstName = function ({ name: { first: firstName } }) {
+  console.log(firstName);
+};
+
+printFirstName(person);  // Logs 'John'
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=partialsupport src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+    				<h1>Arrow Functions</h1>
+                    <section>
+                        <p>Shortened function literal syntax, a la coffescript.</p>
+                    </section>
 				</section>
 			</div>
 		</div>
