@@ -308,6 +308,47 @@ var evens = arr.filter(isEven);
 				<section>
 					<h1>Generators, Iterators, &amp; Comprehensions</h1>
 				</section>
+                <section>
+                    <h1>Generators</h1>
+                    <ul>
+                        <li>Generator Functions</li>
+                        <li>Generator Expressions</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>Generator Functions</h1>
+                    <setion>
+                        <p>Functions that return an infinite sequence, with
+                            lazy computation.
+                        </p>
+                    </setion>
+                    <section>
+                        <pre>
+                            <code>
+function* naturalNumbers() {
+  num = 0;
+  while (true) {
+    num += 1;
+    yield num;
+  }
+}
+naturalNumbers(); // 1
+naturalNumbers(); // 2
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
 				<section>
 					<h1>Scope &amp; Value</h1>
 				</section>
