@@ -374,6 +374,51 @@ naturalNumbers(); // 2
 						</table>
 					</section>
                 </section>
+                <section>
+                    <h1>Iterators</h1>
+                    <section>
+                        <p>Better <code>for in</code> loops.</p>
+                    </section>
+                    <section>
+                        <pre>
+                            <code>
+var getClassRoster = function() {
+  return {
+    iterator: function () {
+      return {
+        elements: roster.students,
+        index: 0,
+        next: function () {
+          if (this.index >= this.elements.length) {
+            throw StopIteration;
+          }
+          this.index += 1;
+          return this.elements[this.index];
+        }
+      };
+    },
+    // ...
+  };
+};
+
+for (var student of getClassRoster()) {
+  recordFinalGrade(student);
+}
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+            			<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=partialsupport src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
 				<section>
 					<h1>Scope &amp; Value</h1>
 				</section>
