@@ -419,6 +419,55 @@ for (var student of getClassRoster()) {
 						</table>
 					</section>
                 </section>
+                <section>
+                    <h1>Array Comprehensions</h1>
+                    <section>
+                        <p>
+                            Succintly create one array from another.
+                        </p>
+                    </section>
+                    <section>
+                        <p>map example.</p>
+                        <pre>
+                            <code>
+var arr = [1, 2, 3];
+
+var times2Array = [x * 2 for (x of arr)];
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <p>filter example.</p>
+                        <pre>
+                            <code>
+var arr = [1, 2, 3, 4, 5, 6];
+
+var evens = [x for (x of arr) if (x % 2 === 0)];
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <p>forEach example.</p>
+                        <pre>
+                            <code>
+var arr = [1, 2, 3];
+
+[console.log(x) for (x of arr)];
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                		<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
 				<section>
 					<h1>Scope &amp; Value</h1>
 				</section>
