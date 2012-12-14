@@ -426,7 +426,7 @@ for (var student of getClassRoster()) {
                         </p>
                     </section>
                     <section>
-                        <p>map example.</p>
+                        <p>map example</p>
                         <pre>
                             <code>
 var arr = [1, 2, 3];
@@ -436,7 +436,7 @@ var times2Array = [x * 2 for (x of arr)];
                         </pre>
                     </section>
                     <section>
-                        <p>filter example.</p>
+                        <p>filter example</p>
                         <pre>
                             <code>
 var arr = [1, 2, 3, 4, 5, 6];
@@ -446,7 +446,7 @@ var evens = [x for (x of arr) if (x % 2 === 0)];
                         </pre>
                     </section>
                     <section>
-                        <p>forEach example.</p>
+                        <p>forEach example</p>
                         <pre>
                             <code>
 var arr = [1, 2, 3];
@@ -457,6 +457,52 @@ var arr = [1, 2, 3];
                     </section>
                     <section>
                 		<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
+                <section>
+                    <h1>Maps &amp; Sets</h1>
+                    <section>
+                        <p>Easy key/value or key collections of <em>any</em> value type.</p>
+                    </section>
+                    <section>
+                        <p>Set example</p>
+                        <pre>
+                            <code>
+var playerGuesses = new Set();
+playerGuesses.add(1);
+playerGuesses.add("two");
+
+playerGuesses.has(1); // true
+playerGuesses.has(2); // false
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <p>Map example</p>
+                        <pre>
+                            <code>
+var players = [{ name: "Mary" }, { name: "Bob" }];
+var playerGuesses = new Map();
+playerGuesses.add('heads', players[0]);
+playerGuesses.add('tails', players[1]);
+
+var flip = Math.random() > .5 ? 'heads' : 'tails';
+var winner = playerGuesses.get(flip);
+var winningName = winner.name;
+// winningName is "Mary" or "Bob"
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                    	<table class=browserTable>
 							<tr>
 								<td><img class=unsupported src=images/chrome.png></td>
 								<td><img src=images/firefox.png></td>
