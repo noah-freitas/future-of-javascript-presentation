@@ -666,6 +666,41 @@ var largest = Math.max(...numbers);
 					</section>
                 </section>
                 <section>
+                	<h1>Modules</h1>
+                	<section>
+                		<p>Simpler namespacing and code sharing.</p>
+                	</section>
+                	<section>
+                		<p>Simple Module and Client</p>
+                		<pre>
+                			<code>
+module 'stringUtilities' {
+	export function trim(str) {
+		// trims whitespace from the string. 
+	}
+}
+
+import { trim } from 'stringUtilities';
+
+var myString = "  abc d   ";
+var trimmed = trim(myString);
+// trimmed is "abc d"
+                			</code>
+                		</pre>
+                	</section>
+                	<section>
+            			<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
+                <section>
     				<h1>Syntax Changes</h1>
 				</section>
 				<section>
@@ -744,17 +779,24 @@ printFirstName(person);  // Logs 'John'
     				<h1>Arrow Functions</h1>
                     <section>
                         <ul>
-                            <li>Shortened function literal syntax, a la coffescript.</li>
+                            <li>Shortened function literal syntax.</li>
                             <li>Lexical scoping of <code>this</code>.</li>
                         </ul>
                     </section>
                     <section>
+                    	<p>Function literal syntax</p>
                         <pre>
                             <code>
 // times2 revisted
 let times2 = x => x * 2;
-
-// Lexical binding of this.
+  
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                    	<p>Lexical Scoping of <code>this</code></p>
+                        <pre>
+                            <code>
 var SlideShow = {
   start: function () {
     window.setTimeout(() => this.next(), 1000);
