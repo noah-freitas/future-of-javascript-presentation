@@ -578,9 +578,9 @@ print(let (a = 4) a);        // Logs 4
                 <section>
                     <h1>Parameter Changes</h1>
                     <ul>
-                        <li>Default parameters</li>
-                        <li>rest</li>
-                        <li>spread</li>
+                        <li>Default Parameters</li>
+                        <li>Rest Parameters</li>
+                        <li>Spread Operator</li>
                     </ul>
                 </section>
                 <section>
@@ -589,7 +589,7 @@ print(let (a = 4) a);        // Logs 4
                         <pre>
                             <code>
 var print = function (item = "nothing") {
-    console.log(item);
+  console.log(item);
 };
 print(); // logs "nothing."
                             </code>
@@ -597,6 +597,65 @@ print(); // logs "nothing."
                     </section>
                     <section>
     					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
+                <section>
+                    <h1>Rest Parameter</h1>
+                    <section>
+                        <p>Simple variable argument functions.</p>
+                        <p>Turning <code>arguments</code> into a real array.</p>
+                    </section>
+                    <section>
+                        <pre>
+                            <code>
+var push = function (arr, ...items) {
+  for (var ii = 0; ii < items.length; ii += 1) {
+    arr.push(items[ii]);
+  }
+};
+
+var numbers = [1, 2, 3];
+push(numbers, 4, 5, 6);
+// numbers is now [1, 2, 3, 4, 5, 6]
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+        				<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+                </section>
+                <section>
+                    <h1>Spread Operator</h1>
+                    <section>
+                        <p>Pass the items in an array to a function as individual parameters.</p>
+                    </section>
+                    <section>
+                        <pre>
+                            <code>
+var numbers = [1, 2, 3, 4, 5];
+var largest = Math.max(...numbers);
+// largest is 5
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+            			<table class=browserTable>
 							<tr>
 								<td><img class=unsupported src=images/chrome.png></td>
 								<td><img src=images/firefox.png></td>
