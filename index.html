@@ -72,7 +72,8 @@
 							Programming Objects
 							<ul>
 								<li>Object.create</li>
-								<li>Object. is, isnt, &amp; observe</li>
+								<li>Immutable Objects</li>
+								<li>Object.observe</li>
 								<li>Proxies</li>
 							</ul>
 						</li>
@@ -822,6 +823,7 @@ var SlideShow = {
 					<h1>Programming Objects</h1>
 					<ul>
 						<li>Object.create</li>
+						<li>Immutable Objects</li>
 					</ul>
 				</section>
 				<section>
@@ -910,6 +912,59 @@ player.video = "Avatar"; // alerts "Rejected!"
 								<td><img src=images/firefox.png></td>
 								<td><img src=images/ie.png></td>
 								<td><img src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Immutable Objects</h1>
+					<section>
+						<p>Prevent changes to an object, with varying levels of severity</p>
+						<ul>
+							<li>Object.preventExtensions</li>
+							<li>Object.seal</li>
+							<li>Object.freeze</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Object.preventExtensions</h2>
+						<p>Can't add any new properties to the object.</p>
+						<p>See also: Object.isExtensible</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h2>Object.seal</h2>
+						<p>Can't change the configuration of any properties.</p>
+						<p>See also: Object.isSealed</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h2>Object.seal</h2>
+						<p>Can't change anything about the object.</p>
+						<p>See also: Object.isFrozen</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
 								<td><img src=images/safari.png></td>
 							</tr>
 						</table>
