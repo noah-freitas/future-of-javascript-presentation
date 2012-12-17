@@ -73,7 +73,6 @@
 							<ul>
 								<li>Object.create</li>
 								<li>Object. is, isnt, &amp; observe</li>
-								<li>Getters/Setters</li>
 								<li>Proxies</li>
 							</ul>
 						</li>
@@ -815,6 +814,103 @@ var SlideShow = {
 								<td><img class=unsupported src=images/ie.png></td>
 								<td><img class=unsupported src=images/opera.png></td>
 								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Programming Objects</h1>
+					<ul>
+						<li>Object.create</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Object.create</h1>
+					<section>
+						<ul>
+							<li>Simpler prototypal inheritance syntax.</li>
+							<li>
+								New control over an object's properties.
+								<ul>
+									<li>Data Properties</li>
+									<li>Accessor Properties</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<p>Prototypal Inheritance</p>
+						<pre>
+							<code>
+var videoPlayerPrototype = {
+  play: function () {
+    if (this.video) {
+      console.log("Playing " +  this.video);
+    }
+  }
+};
+
+var player = Object.create(videoPlayerPrototype);
+player.video = "Crockford on JavaScript";
+player.play();
+// Logs "Playing Crockford on JavaScript"
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Controlling Data Properties</p>
+						<pre>
+							<code>
+var player = Object.create(videoPlayerPrototype, {
+  copyRight: {
+    configurable: false,
+    enumerable: false,
+    value: 'SRJC',
+    writable: false
+  }
+});
+player.copyRight = 'Thief';
+delete player.copyRight;
+
+console.log(player.copyRight); // Logs 'SRJC'
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Accessor Properties</p>
+						<pre>
+							<code>
+var videoTitle;
+var player = Object.create(videoPlayerPrototype, {
+  video: {
+    configurable: false,
+    enumerable: true,
+    get: function () {
+      return videoTitle;
+    },
+    set: function (newTitle) {
+      if (/crockford/ig.test(newTitle)) {
+        title = newTitle;
+      } else {
+        alert('Rejected!');
+      }
+    }
+  }
+});
+
+player.video = "Crockford on JavaScript"; // Works
+player.video = "Avatar"; // alerts "Rejected!"
+							</code>
+						</pre>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
 							</tr>
 						</table>
 					</section>
