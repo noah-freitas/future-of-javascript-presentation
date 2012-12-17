@@ -824,6 +824,7 @@ var SlideShow = {
 					<ul>
 						<li>Object.create</li>
 						<li>Immutable Objects</li>
+						<li>Object.observe</li>
 					</ul>
 				</section>
 				<section>
@@ -966,6 +967,51 @@ player.video = "Avatar"; // alerts "Rejected!"
 								<td><img src=images/ie.png></td>
 								<td><img class=unsupported src=images/opera.png></td>
 								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Object.observe</h1>
+					<section>
+						<p>Add an event listener for any changes to an object.</p>
+					</section>
+					<section>
+						<pre>
+							<code>
+var myObject = {};
+
+var changeLog = function (changed) {
+  console.log(changed);
+};
+
+Object.observe(myObject, changeLog);
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code>
+myObject.id = "X123";
+
+// Logs:
+// { type: "new", object: myObject, name: "id" }
+
+myObject.id = "1234";
+
+// Logs:
+// { type: "updated", object: myObject, name: "id", oldValue: "X123" }
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
 							</tr>
 						</table>
 					</section>
