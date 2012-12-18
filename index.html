@@ -41,19 +41,21 @@
 					<h1>Topics</h1>
 					<ul>
 						<li>
-    						Data Structures
+							Programming Objects
+							<ul>
+								<li>Object.create</li>
+								<li>Immutable Objects</li>
+								<li>Object.observe</li>
+								<li>Proxies</li>
+								<li>Built-In Object Changes</li>
+							</ul>
+						</li>
+						<li>
+    						Other Data Structures
 							<ul>
 								<li>Array Functions</li>
 								<li>Generators, Iterators, &amp; Comprehensions</li>
 								<li>Maps &amp; Sets</li>
-							</ul>
-						</li>
-						<li>
-							Scope &amp; Value
-							<ul>
-								<li>Let</li>
-								<li>Parameters: default values, rest &amp; spread</li>
-								<li>Modules</li>
 							</ul>
 						</li>
 					</ul>
@@ -69,19 +71,377 @@
 							</ul>
 						</li>
 						<li>
-							Programming Objects
+							Scope &amp; Value
 							<ul>
-								<li>Built-In Object Changes</li>
-								<li>Object.create</li>
-								<li>Immutable Objects</li>
-								<li>Object.observe</li>
-								<li>Proxies</li>
+								<li>Let</li>
+								<li>Parameters: default values, rest &amp; spread</li>
+								<li>Modules</li>
 							</ul>
 						</li>
 					</ul>
 				</section>
 				<section>
-					<h1>Data Structures</h1>
+					<h1>Programming Objects</h1>
+					<ul>
+						<li>Object.create</li>
+						<li>Immutable Objects</li>
+						<li>Object.observe</li>
+						<li>Proxies</li>
+						<li>Built-In Object Changes</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Object.create</h1>
+					<section>
+						<ul>
+							<li>Simpler prototypal inheritance syntax.</li>
+							<li>
+								New control over an object's properties.
+								<ul>
+									<li>Data Properties</li>
+									<li>Accessor Properties</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<p>Prototypal Inheritance</p>
+						<pre>
+							<code>
+var videoPlayerPrototype = {
+  play: function () {
+    if (this.video) {
+      console.log("Playing " +  this.video);
+    }
+  }
+};
+
+var player = Object.create(videoPlayerPrototype);
+player.video = "Crockford on JavaScript";
+player.play();
+// Logs "Playing Crockford on JavaScript"
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Controlling Data Properties</p>
+						<pre>
+							<code>
+var player = Object.create(videoPlayerPrototype, {
+  copyRight: {
+    configurable: false,
+    enumerable: false,
+    value: 'SRJC',
+    writable: false
+  }
+});
+player.copyRight = 'Thief';
+delete player.copyRight;
+
+console.log(player.copyRight); // Logs 'SRJC'
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>Accessor Properties</p>
+						<pre>
+							<code>
+var videoTitle;
+var player = Object.create(videoPlayerPrototype, {
+  video: {
+    configurable: false,
+    enumerable: true,
+    get: function () {
+      return videoTitle;
+    },
+    set: function (newTitle) {
+      if (/crockford/ig.test(newTitle)) {
+        videoTitle = newTitle;
+      } else {
+        alert('Rejected!');
+      }
+    }
+  }
+});
+
+player.video = "Crockford on JavaScript"; // Works
+player.video = "Avatar"; // alerts "Rejected!"
+							</code>
+						</pre>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Immutable Objects</h1>
+					<section>
+						<p>Prevent changes to an object, with varying levels of severity</p>
+						<ul>
+							<li>Object.preventExtensions</li>
+							<li>Object.seal</li>
+							<li>Object.freeze</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Object.preventExtensions</h2>
+						<p>Can't add any new properties to the object.</p>
+						<p>See also: Object.isExtensible</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h2>Object.seal</h2>
+						<p>Can't change the configuration of any properties.</p>
+						<p>See also: Object.isSealed</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h2>Object.freeze</h2>
+						<p>Can't change anything about the object.</p>
+						<p>See also: Object.isFrozen</p>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Object.observe</h1>
+					<section>
+						<p>Add an event listener for any changes to an object.</p>
+					</section>
+					<section>
+						<pre>
+							<code>
+var myObject = {};
+
+var changeLog = function (changed) {
+  console.log(changed);
+};
+
+Object.observe(myObject, changeLog);
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code>
+myObject.id = "X123";
+
+// Logs:
+// { type: "new", object: myObject, name: "id" }
+
+myObject.id = "1234";
+
+// Logs:
+// { type: "updated", object: myObject, name: "id", oldValue: "X123" }
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Proxies</h1>
+					<section>
+						<p>Create fully programmable interfaces for your Objects.</p>
+						<p>Many features natively supported by the language are "trappable".</p>
+					</section>
+					<section>
+						<p>Add an extra property to your object enumeration.</p>
+						<pre>
+							<code>
+var propsPlusOne = Proxy({
+  keys: function (target) {
+    var keys = Object.keys(target);
+    keys.push("secretKey");
+    return keys;
+  },
+  get: function (target, name, receiver) {
+    if (name === "secretKey") {
+      return "You found it!";
+    } else {
+      return target[name];
+    }
+  }
+}, {
+  // rest of object.
+});
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>DB interface.</p>
+						<pre>
+							<code>
+var db = function () {
+  return Proxy({
+    get: function (target, name, receiver) {
+      var db = JSON.parse(window.localStorage.db);
+      return db[name];
+    },
+    set: function(target, name, val, receiver) {
+      var db = JSON.parse(window.localStorage.db);
+      db[name] = val;
+      window.localStorage.db = JSON.serialize(db);
+      return true;
+    }
+  }, {});
+};
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Built-In Object Changes</h1>
+					<ul>
+						<li>Number</li>
+						<li>String</li>
+						<li>Math</li>
+						<li>RegEx</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Number</h1>
+					<section>
+						<ul>
+							<li>Number.isFinite</li>
+							<li>Number.isNaN</li>
+							<li>Number.isInteger</li>
+							<li>Number.toInteger</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=partialsupport src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>String</h1>
+					<section>
+						<ul>
+							<li>String.prototype.repeat</li>
+							<li>String.prototype.startsWith</li>
+							<li>String.prototype.endsWith</li>
+							<li>String.prototype.contains</li>
+							<li>String.prototype.toArray</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=partialsupport src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Math</h1>
+					<section>
+						<ul>
+							<li>Better randomness.</li>
+							<li>More math functions.</li>
+							<li>New constants.</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>RegEx</h1>
+					<section>
+						<ul>
+							<li>"y" flag</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Other Data Structures</h1>
+					<ul>
+						<li>Array Functions</li>
+						<li>Generators, Iterators, &amp; Comprehensions</li>
+						<li>Maps &amp; Sets</li>
+					</ul>
 				</section>
 				<section>
 					<hgroup>
@@ -311,7 +671,7 @@ var evens = arr.filter(isEven);
                         <pre>
                             <code>
 function* naturalNumbers() {
-  num = 0;
+  var num = 0;
   while (true) {
     num += 1;
     yield num;
@@ -367,26 +727,32 @@ naturalNumbers(); // 2
                     <section>
                         <pre>
                             <code>
-var getClassRoster = function() {
-  return {
-    iterator: function () {
-      return {
-        elements: roster.students,
-        index: 0,
-        next: function () {
-          if (this.index >= this.elements.length) {
-            throw StopIteration;
-          }
-          this.index += 1;
-          return this.elements[this.index];
+var classRoster = {
+  students: [
+    // a bunch of students.
+  ],
+  sectionNumber: '1234',
+  iterator: function () {
+    return {
+      elements: classRoster.students,
+      index: 0,
+      next: function () {
+        if (this.index >= this.elements.length) {
+          throw StopIteration;
         }
-      };
-    },
-    // ...
-  };
+        this.index += 1;
+        return this.elements[this.index];
+      }
+    };
+  }
 };
-
-for (var student of getClassRoster()) {
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>
+							<code>
+for (var student of classRoster) {
   recordFinalGrade(student);
 }
                             </code>
@@ -801,361 +1167,6 @@ var SlideShow = {
 							<tr>
 								<td><img class=unsupported src=images/chrome.png></td>
 								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Programming Objects</h1>
-					<ul>
-						<li>Built-In Object Changes</li>
-						<li>Object.create</li>
-						<li>Immutable Objects</li>
-						<li>Object.observe</li>
-						<li>Proxies</li>
-					</ul>
-				</section>
-				<section>
-					<h1>Built-In Object Changes</h1>
-					<ul>
-						<li>Number</li>
-						<li>String</li>
-						<li>Math</li>
-						<li>RegEx</li>
-					</ul>
-				</section>
-				<section>
-					<h1>Number</h1>
-					<section>
-						<ul>
-							<li>Number.isFinite</li>
-							<li>Number.isNaN</li>
-							<li>Number.isInteger</li>
-							<li>Number.toInteger</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=partialsupport src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>String</h1>
-					<section>
-						<ul>
-							<li>String.prototype.repeat</li>
-							<li>String.prototype.startsWith</li>
-							<li>String.prototype.endsWith</li>
-							<li>String.prototype.contains</li>
-							<li>String.prototype.toArray</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=partialsupport src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Math</h1>
-					<section>
-						<ul>
-							<li>Better randomness.</li>
-							<li>More math functions.</li>
-							<li>New constants.</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>RegEx</h1>
-					<section>
-						<ul>
-							<li>"y" flag</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Object.create</h1>
-					<section>
-						<ul>
-							<li>Simpler prototypal inheritance syntax.</li>
-							<li>
-								New control over an object's properties.
-								<ul>
-									<li>Data Properties</li>
-									<li>Accessor Properties</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-					<section>
-						<p>Prototypal Inheritance</p>
-						<pre>
-							<code>
-var videoPlayerPrototype = {
-  play: function () {
-    if (this.video) {
-      console.log("Playing " +  this.video);
-    }
-  }
-};
-
-var player = Object.create(videoPlayerPrototype);
-player.video = "Crockford on JavaScript";
-player.play();
-// Logs "Playing Crockford on JavaScript"
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Controlling Data Properties</p>
-						<pre>
-							<code>
-var player = Object.create(videoPlayerPrototype, {
-  copyRight: {
-    configurable: false,
-    enumerable: false,
-    value: 'SRJC',
-    writable: false
-  }
-});
-player.copyRight = 'Thief';
-delete player.copyRight;
-
-console.log(player.copyRight); // Logs 'SRJC'
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Accessor Properties</p>
-						<pre>
-							<code>
-var videoTitle;
-var player = Object.create(videoPlayerPrototype, {
-  video: {
-    configurable: false,
-    enumerable: true,
-    get: function () {
-      return videoTitle;
-    },
-    set: function (newTitle) {
-      if (/crockford/ig.test(newTitle)) {
-        title = newTitle;
-      } else {
-        alert('Rejected!');
-      }
-    }
-  }
-});
-
-player.video = "Crockford on JavaScript"; // Works
-player.video = "Avatar"; // alerts "Rejected!"
-							</code>
-						</pre>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Immutable Objects</h1>
-					<section>
-						<p>Prevent changes to an object, with varying levels of severity</p>
-						<ul>
-							<li>Object.preventExtensions</li>
-							<li>Object.seal</li>
-							<li>Object.freeze</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Object.preventExtensions</h2>
-						<p>Can't add any new properties to the object.</p>
-						<p>See also: Object.isExtensible</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>Object.seal</h2>
-						<p>Can't change the configuration of any properties.</p>
-						<p>See also: Object.isSealed</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>Object.freeze</h2>
-						<p>Can't change anything about the object.</p>
-						<p>See also: Object.isFrozen</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Object.observe</h1>
-					<section>
-						<p>Add an event listener for any changes to an object.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var myObject = {};
-
-var changeLog = function (changed) {
-  console.log(changed);
-};
-
-Object.observe(myObject, changeLog);
-							</code>
-						</pre>
-					</section>
-					<section>
-						<pre>
-							<code>
-myObject.id = "X123";
-
-// Logs:
-// { type: "new", object: myObject, name: "id" }
-
-myObject.id = "1234";
-
-// Logs:
-// { type: "updated", object: myObject, name: "id", oldValue: "X123" }
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Proxies</h1>
-					<section>
-						<p>Create fully programmable interfaces for your Objects.</p>
-						<p>Many features natively supported by the language are "trappable".</p>
-					</section>
-					<section>
-						<p>Add an extra property to your object enumeration.</p>
-						<pre>
-							<code>
-var propsPlusOne = Proxy({
-  keys: function (target) {
-    var keys = Object.keys(target);
-    keys.push("secretKey");
-    return keys;
-  },
-  get: function (target, name, receiver) {
-    if (name === "secretKey") {
-      return "You found it!";
-    } else {
-      return target[name];
-    }
-  }
-}, {
-  // rest of object.
-});
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>DB interface.</p>
-						<pre>
-							<code>
-var db = function () {
-  return Proxy({
-    get: function (target, name, receiver) {
-      var db = JSON.parse(window.localStorage.db);
-      return db[name];
-    },
-    set: function(target, name, val, receiver) {
-      var db = JSON.parse(window.localStorage.db);
-      db[name] = val;
-      window.localStorage.db = JSON.serialize(db);
-      return true;
-    }
-  }, {});
-};
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
 								<td><img class=unsupported src=images/ie.png></td>
 								<td><img class=unsupported src=images/opera.png></td>
 								<td><img class=unsupported src=images/safari.png></td>
