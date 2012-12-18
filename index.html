@@ -38,7 +38,7 @@
 					</ul>
 				</section>
 				<section>
-					<h1>Topics 1</h1>
+					<h1>Topics</h1>
 					<ul>
 						<li>
     						Data Structures
@@ -59,7 +59,7 @@
 					</ul>
 				</section>
 				<section>
-					<h1>Topics 2</h1>
+					<h1>Topics</h1>
 					<ul>
                         <li>
     						Syntax Changes
@@ -71,6 +71,7 @@
 						<li>
 							Programming Objects
 							<ul>
+								<li>Built-In Object Changes</li>
 								<li>Object.create</li>
 								<li>Immutable Objects</li>
 								<li>Object.observe</li>
@@ -80,13 +81,11 @@
 					</ul>
 				</section>
 				<section>
-					<h1>Topics 3</h1>
+					<h1>Topics</h1>
 					<ul>
 						<li>
 							Other
 							<ul>
-								<li>Yield</li>
-								<li>Built-In Objects: Number, Regex, String, &amp; Math</li>
 								<li>Pragmas (`use`)</li>
 								<li>UTF-16</li>
 							</ul>
@@ -824,11 +823,106 @@ var SlideShow = {
 				<section>
 					<h1>Programming Objects</h1>
 					<ul>
+						<li>Built-In Object Changes</li>
 						<li>Object.create</li>
 						<li>Immutable Objects</li>
 						<li>Object.observe</li>
 						<li>Proxies</li>
 					</ul>
+				</section>
+				<section>
+					<h1>Built-In Object Changes</h1>
+					<ul>
+						<li>Number</li>
+						<li>String</li>
+						<li>Math</li>
+						<li>RegEx</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Number</h1>
+					<section>
+						<ul>
+							<li>Number.isFinite</li>
+							<li>Number.isNaN</li>
+							<li>Number.isInteger</li>
+							<li>Number.toInteger</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=partialsupport src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>String</h1>
+					<section>
+						<ul>
+							<li>String.prototype.repeat</li>
+							<li>String.prototype.startsWith</li>
+							<li>String.prototype.endsWith</li>
+							<li>String.prototype.contains</li>
+							<li>String.prototype.toArray</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=partialsupport src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>Math</h1>
+					<section>
+						<ul>
+							<li>Better randomness.</li>
+							<li>More math functions.</li>
+							<li>New constants.</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img class=unsupported src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<h1>RegEx</h1>
+					<section>
+						<ul>
+							<li>"y" flag</li>
+						</ul>
+					</section>
+					<section>
+    					<table class=browserTable>
+							<tr>
+								<td><img class=unsupported src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
 				</section>
 				<section>
 					<h1>Object.create</h1>
