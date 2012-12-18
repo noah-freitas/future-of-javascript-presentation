@@ -674,12 +674,14 @@ var largest = Math.max(...numbers);
                 		<p>Simple Module and Client</p>
                 		<pre>
                 			<code>
+// Module file.
 module 'stringUtilities' {
   export function trim(str) {
     // trims whitespace from the string.
   }
 }
 
+// Client file.
 import { trim } from 'stringUtilities';
 
 var myString = "  abc d   ";
@@ -825,6 +827,7 @@ var SlideShow = {
 						<li>Object.create</li>
 						<li>Immutable Objects</li>
 						<li>Object.observe</li>
+						<li>Proxies</li>
 					</ul>
 				</section>
 				<section>
@@ -957,7 +960,7 @@ player.video = "Avatar"; // alerts "Rejected!"
 						</table>
 					</section>
 					<section>
-						<h2>Object.seal</h2>
+						<h2>Object.freeze</h2>
 						<p>Can't change anything about the object.</p>
 						<p>See also: Object.isFrozen</p>
 						<table class=browserTable>
@@ -1016,9 +1019,78 @@ myObject.id = "1234";
 						</table>
 					</section>
 				</section>
+				<section>
+					<h1>Proxies</h1>
+					<section>
+						<p>Create fully programmable interfaces for your Objects.</p>
+						<p>Many features natively supported by the language are "trappable".</p>
+					</section>
+					<section>
+						<p>Add an extra property to your object enumeration.</p>
+						<pre>
+							<code>
+var propsPlusOne = Proxy({
+  keys: function (target) {
+    var keys = Object.keys(target);
+    keys.push("secretKey");
+    return keys;
+  },
+  get: function (target, name, receiver) {
+    if (name === "secretKey") {
+      return "You found it!";
+    } else {
+      return target[name];
+    }
+  }
+}, {
+  // rest of object.
+});
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>DB interface.</p>
+						<pre>
+							<code>
+var db = function () {
+  return Proxy({
+    get: function (target, name, receiver) {
+      var db = JSON.parse(window.localStorage.db);
+      return db[name];
+    },
+    set: function(target, name, val, receiver) {
+      var db = JSON.parse(window.localStorage.db);
+      db[name] = val;
+      window.localStorage.db = JSON.serialize(db);
+      return true;
+    }
+  }, {});
+};
+							</code>
+						</pre>
+					</section>
+					<section>
+						<table class=browserTable>
+							<tr>
+								<td><img src=images/chrome.png></td>
+								<td><img src=images/firefox.png></td>
+								<td><img class=unsupported src=images/ie.png></td>
+								<td><img class=unsupported src=images/opera.png></td>
+								<td><img class=unsupported src=images/safari.png></td>
+							</tr>
+						</table>
+					</section>
+				</section>
                 <section>
                     <h1>Traceur</h1>
                     <p>Google's "Javascript.next-to-Javascript-of-today compiler"</p>
+                </section>
+                <section>
+                	<h1>Skipped</h1>
+                	<ul>
+                		<li>Typed Arrays</li>
+                		<li>Binary Data</li>
+                	</ul>
                 </section>
 			</div>
 		</div>
