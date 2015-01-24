@@ -20,294 +20,177 @@
 			}
 		</style>
 	</head>
+	<!--
+		<section>
+			<table class=browserTable>
+				<tr>
+					<td><img src=images/chrome.png></td>
+					<td><img src=images/firefox.png></td>
+					<td><img src=images/ie.png></td>
+					<td><img src=images/opera.png></td>
+					<td><img src=images/safari.png></td>
+				</tr>
+			</table>
+		</section>
+	-->
 	<body>
 		<div class=reveal>
 			<div class=slides>
 				<section>
 					<hgroup>
-						<h1>ES5 &amp; ES.Next</h1>
-						<h2>The Present and (Near) Future of JavaScript</h2>
+						<h1>ES6</h1>
+						<h2>In 15 Minutes</h2>
 					</hgroup>
 				</section>
 				<section>
 					<h1>Goals</h1>
 					<ul>
-						<li>Survey recent and upcoming changes to JavaScript</li>
-						<li>With short, readable code examples</li>
-						<li>And a look towards current browser implementations</li>
+						<li>Survey ECMAScript Version 6 extensions and changes</li>
+						<li>With a look towards current browser implementations</li>
 					</ul>
 				</section>
 				<section>
-					<h1>Topics</h1>
+					<h1>Primitives</h1>
+				</section>
+				<section>
+					<h1>Number</h1>
 					<ul>
-						<li>
-							Programming Objects
-							<ul>
-								<li>Object.create</li>
-								<li>Immutable Objects</li>
-								<li>Object.observe</li>
-								<li>Proxies</li>
-								<li>Built-In Object Changes</li>
-							</ul>
-						</li>
-						<li>
-    						Other Data Structures
-							<ul>
-								<li>Array Functions</li>
-								<li>Generators, Iterators, &amp; Comprehensions</li>
-								<li>Maps &amp; Sets</li>
-							</ul>
-						</li>
+                        <li>Number Literal Syntax</li>
+                        <li><code>Number.isFinite</code></li>
+						<li><code>Number.isInteger</code></li>
+						<li><code>Number.isSafeInteger</code></li>
+						<li><code>Number.isNaN</code></li>
+						<li><code>Number.EPSILON</code></li>
+						<li><code>Number.MIN_SAFE_INTEGER</code></li>
+						<li><code>Number.MAX_SAFE_INTEGER</code></li>
 					</ul>
 				</section>
 				<section>
-					<h1>Topics</h1>
+					<h1>String</h1>
 					<ul>
-                        <li>
-    						Syntax Changes
-							<ul>
-								<li>Destructuring</li>
-								<li>Arrow Functions</li>
-							</ul>
-						</li>
-						<li>
-							Scope &amp; Value
-							<ul>
-								<li>Let</li>
-								<li>Parameters: default values, rest &amp; spread</li>
-								<li>Modules</li>
-							</ul>
-						</li>
+						<li>Template Strings</li>
+						<li>Unicode code point escapes</li>
+						<li><code>String.fromCodePoint</code></li>
+						<li><code>String.raw</code></li>
+						<li><code>String.prototype.codePointAt</code></li>
+						<li><code>String.prototype.normalize</code></li>
+						<li><code>String.prototype.repeat</code></li>
+						<li><code>String.prototype.startsWith</code></li>
+						<li><code>String.prototype.endsWith</code></li>
+						<li><code>String.prototype.includes</code></li>
+						<li><code>String.prototype.&lt;tag&gt;</code></li>
 					</ul>
 				</section>
 				<section>
-					<h1>Programming Objects</h1>
+					<h1>Symbol</h1>
 					<ul>
-						<li>Object.create</li>
-						<li>Immutable Objects</li>
-						<li>Object.observe</li>
-						<li>Proxies</li>
-						<li>Built-In Object Changes</li>
+						<li><code>Symbol.for</code></li>
 					</ul>
 				</section>
 				<section>
-					<h1>Object.create</h1>
-					<section>
-						<ul>
-							<li>Simpler prototypal inheritance syntax.</li>
-							<li>
-								New control over an object's properties.
-								<ul>
-									<li>Data Properties</li>
-									<li>Accessor Properties</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-					<section>
-						<p>Prototypal Inheritance</p>
-						<pre>
-							<code>
-var videoPlayerPrototype = {
-  play: function () {
-    if (this.video) {
-      console.log("Playing " +  this.video);
-    }
-  }
-};
-
-var player = Object.create(videoPlayerPrototype);
-player.video = "Crockford on JavaScript";
-player.play();
-// Logs "Playing Crockford on JavaScript"
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Controlling Data Properties</p>
-						<pre>
-							<code>
-var player = Object.create(videoPlayerPrototype, {
-  copyRight: {
-    configurable: false,
-    enumerable: false,
-    value: 'SRJC',
-    writable: false
-  }
-});
-player.copyRight = 'Thief';
-delete player.copyRight;
-
-console.log(player.copyRight); // Logs 'SRJC'
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Accessor Properties</p>
-						<pre>
-							<code>
-var videoTitle;
-var player = Object.create(videoPlayerPrototype, {
-  video: {
-    configurable: false,
-    enumerable: true,
-    get: function () {
-      return videoTitle;
-    },
-    set: function (newTitle) {
-      if (/crockford/ig.test(newTitle)) {
-        videoTitle = newTitle;
-      } else {
-        alert('Rejected!');
-      }
-    }
-  }
-});
-
-player.video = "Crockford on JavaScript"; // Works
-player.video = "Avatar"; // alerts "Rejected!"
-							</code>
-						</pre>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
+					<h1>Names &amp; Assignments</h1>
+					<ul>
+						<li><code>let</code></li>
+						<li><code>const</code></li>
+						<li>Destructuring</li>
+					</ul>
 				</section>
 				<section>
-					<h1>Immutable Objects</h1>
-					<section>
-						<p>Prevent changes to an object, with varying levels of severity</p>
-						<ul>
-							<li>Object.preventExtensions</li>
-							<li>Object.seal</li>
-							<li>Object.freeze</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Object.preventExtensions</h2>
-						<p>Can't add any new properties to the object.</p>
-						<p>See also: Object.isExtensible</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>Object.seal</h2>
-						<p>Can't change the configuration of any properties.</p>
-						<p>See also: Object.isSealed</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>Object.freeze</h2>
-						<p>Can't change anything about the object.</p>
-						<p>See also: Object.isFrozen</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
+					<h1>Iteration</h1>
+					<ul>
+						<li><code>for (let a of as)</code></li>
+					</ul>
 				</section>
 				<section>
-					<h1>Object.observe</h1>
-					<section>
-						<p>Add an event listener for any changes to an object.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var myObject = {};
-
-var changeLog = function (changed) {
-  console.log(changed);
-};
-
-Object.observe(myObject, changeLog);
-							</code>
-						</pre>
-					</section>
-					<section>
-						<pre>
-							<code>
-myObject.id = "X123";
-
-// Logs:
-// { type: "new", object: myObject, name: "id" }
-
-myObject.id = "1234";
-
-// Logs:
-// { type: "updated", object: myObject, name: "id", oldValue: "X123" }
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
+					<h1>Objects</h1>
+					<ul>
+						<li>Object.assign</li>
+						<li>Object.is</li>
+						<li>Object.getOwnPropertySymbols</li>
+						<li>Object.setPrototypeOf</li>
+					</ul>
 				</section>
 				<section>
-					<h1>Proxies</h1>
-					<section>
-						<p>Create fully programmable interfaces for your Objects.</p>
-						<p>Many features natively supported by the language are "trappable".</p>
-					</section>
-					<section>
-						<p>Add an extra property to your object enumeration.</p>
-						<pre>
-							<code>
+					<h1>Class</h1>
+					<ul>
+						<li>constructor()</li>
+						<li>super</li>
+						<li>getters/setters</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Object Literal Syntax</h1>
+					<ul>
+						<li>Computed Properties</li>
+						<li>Shorthand Methods &amp; Properties</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Functions</h1>
+					<ul>
+						<li>Function.prototype.toMethod</li>
+						<li>Function name property</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Function Syntax</h1>
+					<ul>
+						<li>Default Parameters</li>
+						<li>Rest Parameters</li>
+						<li>Spread Operator</li>
+						<li>Arrow Functions</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Generators</h1>
+					<ul>
+						<li><code>yield</code></li>
+						<li><code>yield*</code></li>
+					</ul>
+				</section>
+				<section>
+					<h1>Functional Programming</h1>
+					<ul>
+						<li>Proper Tail Calls</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Array</h1>
+					<ul>
+						<li><code>Array.from</code></li>
+						<li><code>Array.of</code></li>
+						<li><code>Array.prototype.copyWithin</code></li>
+						<li><code>Array.prototype.find</code></li>
+						<li><code>Array.prototype.findIndex</code></li>
+						<li><code>Array.prototype.fill</code></li>
+						<li><code>Array.prototype.keys</code></li>
+						<li><code>Array.prototype.values</code></li>
+						<li><code>Array.prototype.entries</code></li>
+					</ul>
+				</section>
+				<section>
+					<p>Add an extra property to your object enumeration.</p>
+					<pre>
+						<code>
 var propsPlusOne = Proxy({
-  keys: function (target) {
-    var keys = Object.keys(target);
-    keys.push("secretKey");
-    return keys;
-  },
-  get: function (target, name, receiver) {
-    if (name === "secretKey") {
-      return "You found it!";
-    } else {
-      return target[name];
-    }
-  }
+keys: function (target) {
+var keys = Object.keys(target);
+keys.push("secretKey");
+return keys;
+},
+get: function (target, name, receiver) {
+if (name === "secretKey") {
+  return "You found it!";
+} else {
+  return target[name];
+}
+}
 }, {
-  // rest of object.
+// rest of object.
 });
-							</code>
-						</pre>
-					</section>
+						</code>
+					</pre>
+				</section>
 					<section>
 						<p>DB interface.</p>
 						<pre>
