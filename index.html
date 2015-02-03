@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html lang=en>
-	<head>
-		<meta charset=UTF-8>
-		<title>ES5 &amp; ES.Next: The Present and (Near) Future of JavaScript</title>
-		<link rel=stylesheet href=css/reveal.css>
-		<link rel=stylesheet href=css/theme/default.css>
-		<link rel=stylesheet href=lib/css/zenburn.css>
-		<style>
-			.browserTable img {
-				width: 150px;
-			}
-			.browserTable img.unsupported {
-				opacity: .1;
-				border-color: black;
-			}
-			.browserTable img.partialsupport {
-				opacity: .5;
-				border-color: orange;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset=UTF-8>
+	<title>ES5 &amp; ES.Next: The Present and (Near) Future of JavaScript</title>
+	<link rel=stylesheet href=css/reveal.css>
+	<link rel=stylesheet href=css/theme/default.css>
+	<link rel=stylesheet href=lib/css/zenburn.css>
+	<style>
+		ul:not(.browserList) > li {
+			margin-bottom : 45px;
+		}
+		ul.browserList {
+			display         : inline-flex !important;
+			flex-direction  : row;
+			list-style-type : none !important;
+			margin-bottom   : 30px;
+			position        : relative;
+			top             : 10px;
+		}
+		.browserList li {
+			border-radius : 50%;
+			margin        : 0 10px 0 0;
+			height        : 40px;
+			width         : 40px;
+		}
+		.browserList img {
+			border        : none !important;
+			margin        : 0 !important;
+			max-width     : 100%;
+		}
+		.browserList li.none {
+			background : rgba(0, 0, 0, 0.1);
+		}
+		.browserList li.none img {
+			opacity : 0.1;
+		}
+		.browserList li.beta {
+			background : rgba(100, 50, 150, 0.7);
+		}
+		.browserList li.flag {
+			background : rgba(255, 160, 0, 0.7);
+		}
+		.browserList li.beta img, .browserList li.flag img {
+			opacity : 0.5;
+		}
+		.browserList li.full {
+			background : rgba(0, 255, 0, 0.7);
+		}
+	</style>
+</head>
 	<!--
 		<section>
-			<table class=browserTable>
+			<table class=browserList>
 				<tr>
 					<td><img src=images/chrome.png></td>
 					<td><img src=images/firefox.png></td>
@@ -55,14 +84,221 @@
 				<section>
 					<h1>Number</h1>
 					<ul>
-                        <li>Number Literal Syntax</li>
-                        <li><code>Number.isFinite</code></li>
-						<li><code>Number.isInteger</code></li>
-						<li><code>Number.isSafeInteger</code></li>
-						<li><code>Number.isNaN</code></li>
-						<li><code>Number.EPSILON</code></li>
-						<li><code>Number.MIN_SAFE_INTEGER</code></li>
-						<li><code>Number.MAX_SAFE_INTEGER</code></li>
+						<li>
+							Octal Literals
+							<ul class="browserList">
+								<li class="beta">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+							<p>Base 8 number literal syntax</p>
+							<pre><code>(0o10 === 8 && 0O10 === 8) === true</code></pre>
+						</li>
+						<li>
+							Binary Literals
+							<ul class="browserList">
+								<li class="beta">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+							<p>Base 2 number literal syntax</p>
+							<pre><code>(0b10 === 2 && 0B10 === 2) === true</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Number</h1>
+					<ul>
+						<li>
+							<code>Number.isFinite</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="full">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+							<p>Returns <code>false</code> for <code>Infinity</code> and <code>NaN</code>, <code>true</code> otherwise</p>
+							<pre><code>Number.isFinite(Infinity)  === false</code></pre>
+							<pre><code>Number.isFinite(-Infinity) === false</code></pre>
+							<pre><code>Number.isFinite(NaN)       === false</code></pre>
+							<pre><code>Number.isFinite(1)         === true</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Number</h1>
+					<ul>
+						<li>
+							<code>Number.isInteger</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+							<p>Returns <code>true</code> if the input is an integer, <code>false</code> otherwise.</p>
+							<pre><code>Number.isInteger(Infinity)  === false</code></pre>
+							<pre><code>Number.isInteger(-Infinity) === false</code></pre>
+							<pre><code>Number.isInteger(NaN)       === false</code></pre>
+							<pre><code>Number.isInteger(1.1)       === false</code></pre>
+							<pre><code>Number.isInteger(1)         === true</code></pre>
+							<pre><code>Number.isInteger(0)         === true</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Number</h1>
+					<ul>
+						<li>
+							<code>Number.isSafeInteger</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+						</li>
+						<li>
+							<code>Number.isNaN</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="full">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+						</li>
+						<li>
+							<code>Number.EPSILON</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+							<p>
+								The difference between one and the smallest value greater than one that can be represented as a Number.
+							</p>
+							<pre><code>Number.EPSILON === Math.pow(2, -52) === 2.220446049250313e-16</code></pre>
+						</li>
+						<li>
+							<code>Number.MIN_SAFE_INTEGER</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+						</li>
+						<li>
+							<code>Number.MAX_SAFE_INTEGER</code>
+							<ul class="browserList">
+								<li class="full">
+									<img src="images/chrome.png">
+								</li>
+								<li class="full">
+									<img src="images/firefox.png">
+								</li>
+								<li class="beta">
+									<img src="images/ie.png">
+								</li>
+								<li class="none">
+									<img src="images/safari.png">
+								</li>
+								<li class="flag">
+									<img src="images/node.svg">
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</section>
 				<section>
@@ -172,913 +408,913 @@
 					<p>Add an extra property to your object enumeration.</p>
 					<pre>
 						<code>
-var propsPlusOne = Proxy({
-keys: function (target) {
-var keys = Object.keys(target);
-keys.push("secretKey");
-return keys;
-},
-get: function (target, name, receiver) {
-if (name === "secretKey") {
-  return "You found it!";
-} else {
-  return target[name];
-}
-}
-}, {
-// rest of object.
-});
-						</code>
-					</pre>
-				</section>
-					<section>
-						<p>DB interface.</p>
-						<pre>
-							<code>
-var db = function () {
-  return Proxy({
-    get: function (target, name, receiver) {
-      var db = JSON.parse(window.localStorage.db);
-      return db[name];
-    },
-    set: function(target, name, val, receiver) {
-      var db = JSON.parse(window.localStorage.db);
-      db[name] = val;
-      window.localStorage.db = JSON.serialize(db);
-      return true;
-    }
-  }, {});
+							var propsPlusOne = Proxy({
+							keys: function (target) {
+							var keys = Object.keys(target);
+							keys.push("secretKey");
+							return keys;
+						},
+						get: function (target, name, receiver) {
+						if (name === "secretKey") {
+						return "You found it!";
+					} else {
+					return target[name];
+				}
+			}
+		}, {
+		// rest of object.
+	});
+</code>
+</pre>
+</section>
+<section>
+	<p>DB interface.</p>
+	<pre>
+		<code>
+			var db = function () {
+			return Proxy({
+			get: function (target, name, receiver) {
+			var db = JSON.parse(window.localStorage.db);
+			return db[name];
+		},
+		set: function(target, name, val, receiver) {
+		var db = JSON.parse(window.localStorage.db);
+		db[name] = val;
+		window.localStorage.db = JSON.serialize(db);
+		return true;
+	}
+}, {});
 };
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Built-In Object Changes</h1>
-					<ul>
-						<li>Number</li>
-						<li>String</li>
-						<li>Math</li>
-						<li>RegEx</li>
-					</ul>
-				</section>
-				<section>
-					<h1>Number</h1>
-					<section>
-						<ul>
-							<li>Number.isFinite</li>
-							<li>Number.isNaN</li>
-							<li>Number.isInteger</li>
-							<li>Number.toInteger</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=partialsupport src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>String</h1>
-					<section>
-						<ul>
-							<li>String.prototype.repeat</li>
-							<li>String.prototype.startsWith</li>
-							<li>String.prototype.endsWith</li>
-							<li>String.prototype.contains</li>
-							<li>String.prototype.toArray</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=partialsupport src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Math</h1>
-					<section>
-						<ul>
-							<li>Better randomness.</li>
-							<li>More math functions.</li>
-							<li>New constants.</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>RegEx</h1>
-					<section>
-						<ul>
-							<li>"y" flag</li>
-						</ul>
-					</section>
-					<section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Other Data Structures</h1>
-					<ul>
-						<li>Array Functions</li>
-						<li>Generators, Iterators, &amp; Comprehensions</li>
-						<li>Maps &amp; Sets</li>
-					</ul>
-				</section>
-				<section>
-					<hgroup>
-						<h1>Array Functions</h1>
-						<h2>Moving Beyond <code>for</code></h2>
-					</hgroup>
-					<ul>
-						<li>forEach</li>
-						<li>map</li>
-						<li>reduce</li>
-						<li>filter</li>
-						<li>Others</li>
-					</ul>
-				</section>
-				<section>
-					<h1>forEach</h1>
-					<section>
-						<p>Executes a function for each item in an array.</p>
-						<p>The function is passed three parameters: the current value, the index,
-							and the complete array.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var arr = [1, 2, 3];
+</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img src=images/chrome.png></td>
+			<td><img src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Built-In Object Changes</h1>
+	<ul>
+		<li>Number</li>
+		<li>String</li>
+		<li>Math</li>
+		<li>RegEx</li>
+	</ul>
+</section>
+<section>
+	<h1>Number</h1>
+	<section>
+		<ul>
+			<li>Number.isFinite</li>
+			<li>Number.isNaN</li>
+			<li>Number.isInteger</li>
+			<li>Number.toInteger</li>
+		</ul>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=partialsupport src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>String</h1>
+	<section>
+		<ul>
+			<li>String.prototype.repeat</li>
+			<li>String.prototype.startsWith</li>
+			<li>String.prototype.endsWith</li>
+			<li>String.prototype.contains</li>
+			<li>String.prototype.toArray</li>
+		</ul>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img class=partialsupport src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>Math</h1>
+	<section>
+		<ul>
+			<li>Better randomness.</li>
+			<li>More math functions.</li>
+			<li>New constants.</li>
+		</ul>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img class=unsupported src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>RegEx</h1>
+	<section>
+		<ul>
+			<li>"y" flag</li>
+		</ul>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>Other Data Structures</h1>
+	<ul>
+		<li>Array Functions</li>
+		<li>Generators, Iterators, &amp; Comprehensions</li>
+		<li>Maps &amp; Sets</li>
+	</ul>
+</section>
+<section>
+	<hgroup>
+		<h1>Array Functions</h1>
+		<h2>Moving Beyond <code>for</code></h2>
+	</hgroup>
+	<ul>
+		<li>forEach</li>
+		<li>map</li>
+		<li>reduce</li>
+		<li>filter</li>
+		<li>Others</li>
+	</ul>
+</section>
+<section>
+	<h1>forEach</h1>
+	<section>
+		<p>Executes a function for each item in an array.</p>
+		<p>The function is passed three parameters: the current value, the index,
+			and the complete array.</p>
+		</section>
+		<section>
+			<pre>
+				<code>
+					var arr = [1, 2, 3];
 
-var print = function (item) {
-  console.log(item);
+					var print = function (item) {
+					console.log(item);
+				};
+
+				arr.forEach(print);
+
+				// Logs out:
+				//   1
+				//   2
+				//   3
+			</code>
+		</pre>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img src=images/ie.png></td>
+				<td><img src=images/opera.png></td>
+				<td><img src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>map</h1>
+	<section>
+		<p>Creates a new array by calling a function on each element of an array.</p>
+		<p>The function is passed three parameters: the current value, the index,
+			and the complete array.</p>
+		</section>
+		<section>
+			<pre>
+				<code>
+					var arr = [1, 2, 3];
+
+					var times2 = function (item) {
+					return item * 2;
+				};
+
+				var times2Array = arr.map(times2);
+
+				// times2Array now is:
+				//   [2, 4, 6]
+			</code>
+		</pre>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img src=images/ie.png></td>
+				<td><img src=images/opera.png></td>
+				<td><img src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>reduce</h1>
+	<section>
+		<p>Reduces an array to a single value by calling a function for each element
+			in the array.</p>
+			<p>The function is passed four parameters: the previous value, the current value,
+				the index, and the complete array.</p>
+			</section>
+			<section>
+				<pre>
+					<code>
+						var arr = [1, 2, 3];
+
+						var sum = function (item1, item2) {
+						return item1 + item2;
+					};
+
+					var total = arr.reduce(sum);
+
+					// total is 6.
+				</code>
+			</pre>
+		</section>
+		<section>
+			<table class=browserTable>
+				<tr>
+					<td><img src=images/chrome.png></td>
+					<td><img src=images/firefox.png></td>
+					<td><img src=images/ie.png></td>
+					<td><img src=images/opera.png></td>
+					<td><img src=images/safari.png></td>
+				</tr>
+			</table>
+		</section>
+	</section>
+	<section>
+		<h1>filter</h1>
+		<section>
+			<p>Creates a new array with only those elements for which your function
+				returns true.</p>
+				<p>The function is passed three parameters: the current value,
+					the index, and the complete array.</p>
+				</section>
+				<section>
+					<pre>
+						<code>
+							var arr = [1, 2, 3, 4, 5, 6];
+
+							var isEven = function (item) {
+							return item % 2 === 0;
+						};
+
+						var evens = arr.filter(isEven);
+
+						// evens is:
+						//   [2, 4, 6]
+					</code>
+				</pre>
+			</section>
+			<section>
+				<table class=browserTable>
+					<tr>
+						<td><img src=images/chrome.png></td>
+						<td><img src=images/firefox.png></td>
+						<td><img src=images/ie.png></td>
+						<td><img src=images/opera.png></td>
+						<td><img src=images/safari.png></td>
+					</tr>
+				</table>
+			</section>
+		</section>
+		<section>
+			<h1>Others</h1>
+			<section>
+				<ul>
+					<li>indexOf</li>
+					<li>every</li>
+					<li>some</li>
+				</ul>
+			</section>
+			<section>
+				<h2>indexOf</h2>
+				<p>Searches an array for a value.  Returns the first index at which it appears
+					or <code>-1</code> if the value is not in the array.</p>
+					<p>Also: lastIndexOf</p>
+					<table class=browserTable>
+						<tr>
+							<td><img src=images/chrome.png></td>
+							<td><img src=images/firefox.png></td>
+							<td><img src=images/ie.png></td>
+							<td><img src=images/opera.png></td>
+							<td><img src=images/safari.png></td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h2>every</h2>
+					<p>Returns true if your function returns true for each element in the array.</p>
+					<table class=browserTable>
+						<tr>
+							<td><img src=images/chrome.png></td>
+							<td><img src=images/firefox.png></td>
+							<td><img src=images/ie.png></td>
+							<td><img src=images/opera.png></td>
+							<td><img src=images/safari.png></td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h2>some</h2>
+					<p>Returns true if your function returns true for any element in the array.</p>
+					<table class=browserTable>
+						<tr>
+							<td><img src=images/chrome.png></td>
+							<td><img src=images/firefox.png></td>
+							<td><img src=images/ie.png></td>
+							<td><img src=images/opera.png></td>
+							<td><img src=images/safari.png></td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<h1>Generators, Iterators, &amp; Comprehensions</h1>
+			</section>
+			<section>
+				<h1>Generators</h1>
+				<ul>
+					<li>Generator Functions</li>
+					<li>Generator Expressions</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Generator Functions</h1>
+				<section>
+					<p>Functions that return an infinite sequence, with
+						lazy computation.
+					</p>
+				</section>
+				<section>
+					<pre>
+						<code>
+							function* naturalNumbers() {
+							var num = 0;
+							while (true) {
+							num += 1;
+							yield num;
+						}
+					}
+					naturalNumbers(); // 1
+					naturalNumbers(); // 2
+				</code>
+			</pre>
+		</section>
+		<section>
+			<table class=browserTable>
+				<tr>
+					<td><img class=unsupported src=images/chrome.png></td>
+					<td><img src=images/firefox.png></td>
+					<td><img class=unsupported src=images/ie.png></td>
+					<td><img class=unsupported src=images/opera.png></td>
+					<td><img class=unsupported src=images/safari.png></td>
+				</tr>
+			</table>
+		</section>
+	</section>
+	<section>
+		<h1>Generator Expressions</h1>
+		<section>
+			<p>More efficient function arguments.</p>
+		</section>
+		<section>
+			<pre>
+				<code>
+					// Harmony example
+					(xhrGet(url) for (url of getURLs()))
+				</code>
+			</pre>
+		</section>
+		<section>
+			<table class=browserTable>
+				<tr>
+					<td><img class=unsupported src=images/chrome.png></td>
+					<td><img src=images/firefox.png></td>
+					<td><img class=unsupported src=images/ie.png></td>
+					<td><img class=unsupported src=images/opera.png></td>
+					<td><img class=unsupported src=images/safari.png></td>
+				</tr>
+			</table>
+		</section>
+	</section>
+	<section>
+		<h1>Iterators</h1>
+		<section>
+			<p>Better <code>for in</code> loops.</p>
+		</section>
+		<section>
+			<pre>
+				<code>
+					var classRoster = {
+					students: [
+					// a bunch of students.
+					],
+					sectionNumber: '1234',
+					iterator: function () {
+					return {
+					elements: classRoster.students,
+					index: 0,
+					next: function () {
+					if (this.index >= this.elements.length) {
+					throw StopIteration;
+				}
+				this.index += 1;
+				return this.elements[this.index];
+			}
+		};
+	}
 };
+</code>
+</pre>
+</section>
+<section>
+	<pre>
+		<code>
+			for (var student of classRoster) {
+			recordFinalGrade(student);
+		}
+	</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img class=partialsupport src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Array Comprehensions</h1>
+	<section>
+		<p>
+			Succintly create one array from another.
+		</p>
+	</section>
+	<section>
+		<p>map example</p>
+		<pre>
+			<code>
+				var arr = [1, 2, 3];
 
-arr.forEach(print);
+				var times2Array = [x * 2 for (x of arr)];
+			</code>
+		</pre>
+	</section>
+	<section>
+		<p>filter example</p>
+		<pre>
+			<code>
+				var arr = [1, 2, 3, 4, 5, 6];
 
-// Logs out:
-//   1
-//   2
-//   3
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>map</h1>
-					<section>
-						<p>Creates a new array by calling a function on each element of an array.</p>
-						<p>The function is passed three parameters: the current value, the index,
-							and the complete array.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var arr = [1, 2, 3];
+				var evens = [x for (x of arr) if (x % 2 === 0)];
+			</code>
+		</pre>
+	</section>
+	<section>
+		<p>forEach example</p>
+		<pre>
+			<code>
+				var arr = [1, 2, 3];
 
-var times2 = function (item) {
-  return item * 2;
-};
+				[console.log(x) for (x of arr)];
+			</code>
+		</pre>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>Maps &amp; Sets</h1>
+	<section>
+		<p>Easy key/value or key collections of <em>any</em> value type.</p>
+	</section>
+	<section>
+		<p>Set example</p>
+		<pre>
+			<code>
+				var playerGuesses = new Set();
+				playerGuesses.add(1);
+				playerGuesses.add("two");
 
-var times2Array = arr.map(times2);
+				playerGuesses.has(1); // true
+				playerGuesses.has(2); // false
+			</code>
+		</pre>
+	</section>
+	<section>
+		<p>Map example</p>
+		<pre>
+			<code>
+				var players = [{ name: "Mary" }, { name: "Bob" }];
+				var playerGuesses = new Map();
+				playerGuesses.add('heads', players[0]);
+				playerGuesses.add('tails', players[1]);
 
-// times2Array now is:
-//   [2, 4, 6]
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>reduce</h1>
-					<section>
-						<p>Reduces an array to a single value by calling a function for each element
-							in the array.</p>
-						<p>The function is passed four parameters: the previous value, the current value,
-							the index, and the complete array.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var arr = [1, 2, 3];
+				var flip = Math.random() > .5 ? 'heads' : 'tails';
+				var winner = playerGuesses.get(flip);
+				var winningName = winner.name;
+				// winningName is "Mary" or "Bob"
+			</code>
+		</pre>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>Scope &amp; Value</h1>
+</section>
+<section>
+	<h1>let</h1>
+	<section>
+		<p>Provides a way to create sub-scopes within a function.</p>
+		<p>The <code>let</code> keyword can be used in three forms:</p>
+		<ul>
+			<li>block</li>
+			<li>statement</li>
+			<li>expression</li>
+		</ul>
+	</section>
+	<section>
+		<p>Block Example</p>
+		<pre>
+			<code>
+				var a = 5;
 
-var sum = function (item1, item2) {
-  return item1 + item2;
-};
+				for (let ii = 0; ii &lt; 5; ii += 1) {
+				let a = 3;
+				console.log(ii + ': ' + a);
+			}
 
-var total = arr.reduce(sum);
+			// Logs out:
+			//   0: 3
+			//   1: 3
+			//   2: 3
+			//   3: 3
+			//   4: 3
+		</code>
+	</pre>
+</section>
+<section>
+	<p>Expression &amp; Statement Examples</p>
+	<pre>
+		<code>
+			var a = 5;
+			let (a = 3) console.log(a);  // Logs 3
+			console.log(a);              // Logs 5
 
-// total is 6.
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>filter</h1>
-					<section>
-						<p>Creates a new array with only those elements for which your function
-							returns true.</p>
-						<p>The function is passed three parameters: the current value,
-							the index, and the complete array.</p>
-					</section>
-					<section>
-						<pre>
-							<code>
-var arr = [1, 2, 3, 4, 5, 6];
+			var print = function (item) {
+			console.log(item);
+		};
 
-var isEven = function (item) {
-  return item % 2 === 0;
-};
+		print(let (a = 4) a);        // Logs 4
+	</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=partialsupport src=images/chrome.png></td>
+			<td><img src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Parameter Changes</h1>
+	<ul>
+		<li>Default Parameters</li>
+		<li>Rest Parameters</li>
+		<li>Spread Operator</li>
+	</ul>
+</section>
+<section>
+	<h1>Default Parameters</h1>
+	<section>
+		<pre>
+			<code>
+				var print = function (item = "nothing") {
+				console.log(item);
+			};
+			print(); // logs "nothing."
+		</code>
+	</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Rest Parameter</h1>
+	<section>
+		<p>Simple variable argument functions.</p>
+		<p>Turning <code>arguments</code> into a real array.</p>
+	</section>
+	<section>
+		<pre>
+			<code>
+				var push = function (arr, ...items) {
+				for (var ii = 0; ii < items.length; ii += 1) {
+				arr.push(items[ii]);
+			}
+		};
 
-var evens = arr.filter(isEven);
+		var numbers = [1, 2, 3];
+		push(numbers, 4, 5, 6);
+		// numbers is now [1, 2, 3, 4, 5, 6]
+	</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Spread Operator</h1>
+	<section>
+		<p>Pass the items in an array to a function as individual parameters.</p>
+	</section>
+	<section>
+		<pre>
+			<code>
+				var numbers = [1, 2, 3, 4, 5];
+				var largest = Math.max(...numbers);
+				// largest is 5
+			</code>
+		</pre>
+	</section>
+	<section>
+		<table class=browserTable>
+			<tr>
+				<td><img class=unsupported src=images/chrome.png></td>
+				<td><img src=images/firefox.png></td>
+				<td><img class=unsupported src=images/ie.png></td>
+				<td><img class=unsupported src=images/opera.png></td>
+				<td><img class=unsupported src=images/safari.png></td>
+			</tr>
+		</table>
+	</section>
+</section>
+<section>
+	<h1>Modules</h1>
+	<section>
+		<p>Simpler namespacing and code sharing.</p>
+	</section>
+	<section>
+		<p>Simple Module and Client</p>
+		<pre>
+			<code>
+				// Module file.
+				module 'stringUtilities' {
+				export function trim(str) {
+				// trims whitespace from the string.
+			}
+		}
 
-// evens is:
-//   [2, 4, 6]
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Others</h1>
-					<section>
-						<ul>
-							<li>indexOf</li>
-							<li>every</li>
-							<li>some</li>
-						</ul>
-					</section>
-					<section>
-						<h2>indexOf</h2>
-						<p>Searches an array for a value.  Returns the first index at which it appears
-							or <code>-1</code> if the value is not in the array.</p>
-						<p>Also: lastIndexOf</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>every</h2>
-						<p>Returns true if your function returns true for each element in the array.</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-					<section>
-						<h2>some</h2>
-						<p>Returns true if your function returns true for any element in the array.</p>
-						<table class=browserTable>
-							<tr>
-								<td><img src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img src=images/ie.png></td>
-								<td><img src=images/opera.png></td>
-								<td><img src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Generators, Iterators, &amp; Comprehensions</h1>
-				</section>
-                <section>
-                    <h1>Generators</h1>
-                    <ul>
-                        <li>Generator Functions</li>
-                        <li>Generator Expressions</li>
-                    </ul>
-                </section>
-                <section>
-                    <h1>Generator Functions</h1>
-                    <section>
-                        <p>Functions that return an infinite sequence, with
-                            lazy computation.
-                        </p>
-                    </section>
-                    <section>
-                        <pre>
-                            <code>
-function* naturalNumbers() {
-  var num = 0;
-  while (true) {
-    num += 1;
-    yield num;
-  }
-}
-naturalNumbers(); // 1
-naturalNumbers(); // 2
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Generator Expressions</h1>
-                    <section>
-                        <p>More efficient function arguments.</p>
-                    </section>
-                    <section>
-                        <pre>
-                            <code>
-// Harmony example
-(xhrGet(url) for (url of getURLs()))
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-        				<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Iterators</h1>
-                    <section>
-                        <p>Better <code>for in</code> loops.</p>
-                    </section>
-                    <section>
-                        <pre>
-                            <code>
-var classRoster = {
-  students: [
-    // a bunch of students.
-  ],
-  sectionNumber: '1234',
-  iterator: function () {
-    return {
-      elements: classRoster.students,
-      index: 0,
-      next: function () {
-        if (this.index >= this.elements.length) {
-          throw StopIteration;
-        }
-        this.index += 1;
-        return this.elements[this.index];
-      }
-    };
-  }
-};
-							</code>
-						</pre>
-					</section>
-					<section>
-						<pre>
-							<code>
-for (var student of classRoster) {
-  recordFinalGrade(student);
-}
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-            			<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=partialsupport src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Array Comprehensions</h1>
-                    <section>
-                        <p>
-                            Succintly create one array from another.
-                        </p>
-                    </section>
-                    <section>
-                        <p>map example</p>
-                        <pre>
-                            <code>
-var arr = [1, 2, 3];
+		// Client file.
+		import { trim } from 'stringUtilities';
 
-var times2Array = [x * 2 for (x of arr)];
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                        <p>filter example</p>
-                        <pre>
-                            <code>
-var arr = [1, 2, 3, 4, 5, 6];
+		var myString = "  abc d   ";
+		var trimmed = trim(myString);
+		// trimmed is "abc d"
+	</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img class=unsupported src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Syntax Changes</h1>
+</section>
+<section>
+	<h1>Destructuring</h1>
+	<section>
+		<p>Breaks apart an array or object during assignment (or other value bindings.)</p>
+	</section>
+	<section>
+		<p>Simple swap example</p>
+		<pre>
+			<code>
+				var a = 1;
+				var b = 3;
 
-var evens = [x for (x of arr) if (x % 2 === 0)];
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                        <p>forEach example</p>
-                        <pre>
-                            <code>
-var arr = [1, 2, 3];
+				[a, b] = [b, a];
 
-[console.log(x) for (x of arr)];
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                		<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Maps &amp; Sets</h1>
-                    <section>
-                        <p>Easy key/value or key collections of <em>any</em> value type.</p>
-                    </section>
-                    <section>
-                        <p>Set example</p>
-                        <pre>
-                            <code>
-var playerGuesses = new Set();
-playerGuesses.add(1);
-playerGuesses.add("two");
+				// b is 1 and a is 3.
+			</code>
+		</pre>
+	</section>
+	<section>
+		<p>Break apart a function return value</p>
+		<pre>
+			<code>
+				var firstName, age;
 
-playerGuesses.has(1); // true
-playerGuesses.has(2); // false
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                        <p>Map example</p>
-                        <pre>
-                            <code>
-var players = [{ name: "Mary" }, { name: "Bob" }];
-var playerGuesses = new Map();
-playerGuesses.add('heads', players[0]);
-playerGuesses.add('tails', players[1]);
+				var getPerson = function () {
+				return {
+				name: {
+				first: 'John',
+				last: 'Doe'
+			},
+			age: 42
+		};
+	};
 
-var flip = Math.random() > .5 ? 'heads' : 'tails';
-var winner = playerGuesses.get(flip);
-var winningName = winner.name;
-// winningName is "Mary" or "Bob"
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                    	<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-					<h1>Scope &amp; Value</h1>
-				</section>
-				<section>
-					<h1>let</h1>
-					<section>
-						<p>Provides a way to create sub-scopes within a function.</p>
-						<p>The <code>let</code> keyword can be used in three forms:</p>
-						<ul>
-							<li>block</li>
-							<li>statement</li>
-							<li>expression</li>
-						</ul>
-					</section>
-					<section>
-						<p>Block Example</p>
-						<pre>
-							<code>
-var a = 5;
+	{ name: { first: firstName }, age: age } = getPerson();
 
-for (let ii = 0; ii &lt; 5; ii += 1) {
-  let a = 3;
-  console.log(ii + ': ' + a);
-}
+	// firstName is 'John', age is 42
+</code>
+</pre>
+</section>
+<section>
+	<p>Break apart a function parameter</p>
+	<pre>
+		<code>
+			var person = {
+			name: {
+			first: 'John',
+			last: 'Doe'
+		},
+		age: 42
+	};
 
-// Logs out:
-//   0: 3
-//   1: 3
-//   2: 3
-//   3: 3
-//   4: 3
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Expression &amp; Statement Examples</p>
-						<pre>
-							<code>
-var a = 5;
-let (a = 3) console.log(a);  // Logs 3
-console.log(a);              // Logs 5
-
-var print = function (item) {
-  console.log(item);
-};
-
-print(let (a = 4) a);        // Logs 4
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img class=partialsupport src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-                <section>
-                    <h1>Parameter Changes</h1>
-                    <ul>
-                        <li>Default Parameters</li>
-                        <li>Rest Parameters</li>
-                        <li>Spread Operator</li>
-                    </ul>
-                </section>
-                <section>
-                    <h1>Default Parameters</h1>
-                    <section>
-                        <pre>
-                            <code>
-var print = function (item = "nothing") {
-  console.log(item);
-};
-print(); // logs "nothing."
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Rest Parameter</h1>
-                    <section>
-                        <p>Simple variable argument functions.</p>
-                        <p>Turning <code>arguments</code> into a real array.</p>
-                    </section>
-                    <section>
-                        <pre>
-                            <code>
-var push = function (arr, ...items) {
-  for (var ii = 0; ii < items.length; ii += 1) {
-    arr.push(items[ii]);
-  }
-};
-
-var numbers = [1, 2, 3];
-push(numbers, 4, 5, 6);
-// numbers is now [1, 2, 3, 4, 5, 6]
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-        				<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                    <h1>Spread Operator</h1>
-                    <section>
-                        <p>Pass the items in an array to a function as individual parameters.</p>
-                    </section>
-                    <section>
-                        <pre>
-                            <code>
-var numbers = [1, 2, 3, 4, 5];
-var largest = Math.max(...numbers);
-// largest is 5
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-            			<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-                	<h1>Modules</h1>
-                	<section>
-                		<p>Simpler namespacing and code sharing.</p>
-                	</section>
-                	<section>
-                		<p>Simple Module and Client</p>
-                		<pre>
-                			<code>
-// Module file.
-module 'stringUtilities' {
-  export function trim(str) {
-    // trims whitespace from the string.
-  }
-}
-
-// Client file.
-import { trim } from 'stringUtilities';
-
-var myString = "  abc d   ";
-var trimmed = trim(myString);
-// trimmed is "abc d"
-                			</code>
-                		</pre>
-                	</section>
-                	<section>
-            			<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-                </section>
-                <section>
-    				<h1>Syntax Changes</h1>
-				</section>
-				<section>
-					<h1>Destructuring</h1>
-					<section>
-						<p>Breaks apart an array or object during assignment (or other value bindings.)</p>
-					</section>
-					<section>
-						<p>Simple swap example</p>
-						<pre>
-							<code>
-var a = 1;
-var b = 3;
-
-[a, b] = [b, a];
-
-// b is 1 and a is 3.
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Break apart a function return value</p>
-						<pre>
-							<code>
-var firstName, age;
-
-var getPerson = function () {
-  return {
-    name: {
-      first: 'John',
-      last: 'Doe'
-    },
-    age: 42
-  };
-};
-
-{ name: { first: firstName }, age: age } = getPerson();
-
-// firstName is 'John', age is 42
-							</code>
-						</pre>
-					</section>
-					<section>
-						<p>Break apart a function parameter</p>
-						<pre>
-							<code>
-var person = {
-  name: {
-    first: 'John',
-    last: 'Doe'
-  },
-  age: 42
-};
-
-var printFirstName = function ({ name: { first: firstName } }) {
-  console.log(firstName);
+	var printFirstName = function ({ name: { first: firstName } }) {
+	console.log(firstName);
 };
 
 printFirstName(person);  // Logs 'John'
-							</code>
-						</pre>
-					</section>
-					<section>
-						<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=partialsupport src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-    				<h1>Arrow Functions</h1>
-                    <section>
-                        <ul>
-                            <li>Shortened function literal syntax.</li>
-                            <li>Lexical scoping of <code>this</code>.</li>
-                        </ul>
-                    </section>
-                    <section>
-                    	<p>Function literal syntax</p>
-                        <pre>
-                            <code>
-// times2 revisted
-let times2 = x => x * 2;
-  
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                    	<p>Lexical Scoping of <code>this</code></p>
-                        <pre>
-                            <code>
-var SlideShow = {
-  start: function () {
-    window.setTimeout(() => this.next(), 1000);
-  },
-  // rest of object...
-};
-  
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-    					<table class=browserTable>
-							<tr>
-								<td><img class=unsupported src=images/chrome.png></td>
-								<td><img class=unsupported src=images/firefox.png></td>
-								<td><img class=unsupported src=images/ie.png></td>
-								<td><img class=unsupported src=images/opera.png></td>
-								<td><img class=unsupported src=images/safari.png></td>
-							</tr>
-						</table>
-					</section>
-				</section>
-				<section>
-					<h1>Traceur</h1>
-					<p>Google's "Javascript.next-to-Javascript-of-today compiler"</p>
-				</section>
-				<section>
-					<h1>Skipped</h1>
-					<ul>
-						<li>Typed Arrays</li>
-						<li>Binary Data</li>
-						<li>Weak Maps</li>
-						<li>const</li>
-						<li>Block Functions</li>
-						<li>Pragmas (`use`)</li>
-						<li>UTF-16</li>
-						<li>Proper Tail Calls</li>
-					</ul>
-				</section>
-			</div>
-		</div>
-		<script src=js/reveal.min.js></script>
-		<script>Reveal.initialize();</script>
-		<script src=plugin/highlight/highlight.js></script>
-		<script>hljs.initHighlightingOnLoad();</script>
-	</body>
+</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img class=partialsupport src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Arrow Functions</h1>
+	<section>
+		<ul>
+			<li>Shortened function literal syntax.</li>
+			<li>Lexical scoping of <code>this</code>.</li>
+		</ul>
+	</section>
+	<section>
+		<p>Function literal syntax</p>
+		<pre>
+			<code>
+				// times2 revisted
+				let times2 = x => x * 2;
+
+			</code>
+		</pre>
+	</section>
+	<section>
+		<p>Lexical Scoping of <code>this</code></p>
+		<pre>
+			<code>
+				var SlideShow = {
+				start: function () {
+				window.setTimeout(() => this.next(), 1000);
+			},
+			// rest of object...
+		};
+
+	</code>
+</pre>
+</section>
+<section>
+	<table class=browserTable>
+		<tr>
+			<td><img class=unsupported src=images/chrome.png></td>
+			<td><img class=unsupported src=images/firefox.png></td>
+			<td><img class=unsupported src=images/ie.png></td>
+			<td><img class=unsupported src=images/opera.png></td>
+			<td><img class=unsupported src=images/safari.png></td>
+		</tr>
+	</table>
+</section>
+</section>
+<section>
+	<h1>Traceur</h1>
+	<p>Google's "Javascript.next-to-Javascript-of-today compiler"</p>
+</section>
+<section>
+	<h1>Skipped</h1>
+	<ul>
+		<li>Typed Arrays</li>
+		<li>Binary Data</li>
+		<li>Weak Maps</li>
+		<li>const</li>
+		<li>Block Functions</li>
+		<li>Pragmas (`use`)</li>
+		<li>UTF-16</li>
+		<li>Proper Tail Calls</li>
+	</ul>
+</section>
+</div>
+</div>
+<script src=js/reveal.min.js></script>
+<script>Reveal.initialize();</script>
+<script src=plugin/highlight/highlight.js></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
 </html>
