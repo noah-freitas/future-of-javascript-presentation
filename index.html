@@ -47,6 +47,9 @@
 		.browserList li.full {
 			background : radial-gradient(ellipse at center, #b4e391 0%,#61c419 50%,#b4e391 100%);
 		}
+		section.present ul ul li {
+			margin-bottom : 5px;
+		}
 	</style>
 </head>
 <body>
@@ -336,7 +339,14 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<p>A new type of string literal allowing:</p>
+						<ul>
+							<li>Value interpolation</li>
+							<li>Multi-line strings</li>
+							<li>String processing functions (tagged template strings)</li>
+						</ul>
+						<pre><code>var name = 'bob';<br>`my name is ${name}` === 'my name is bob';</code></pre>
+						<pre><code>`Here is a <br>Multi-line <br>string`</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -362,7 +372,8 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<p>Allows all Unicode characters to be represented by a single code point value.</p>
+						<pre><code>'\u{1D306}' === '\uD834\uDF06'</code></pre>
 					</li>
 				</ul>
 			</section>
