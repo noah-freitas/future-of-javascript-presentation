@@ -21,8 +21,8 @@
 		.browserList li {
 			border-radius : 50%;
 			margin        : 0 10px 0 0;
-			height        : 40px;
-			width         : 40px;
+			height        : 35px;
+			width         : 35px;
 		}
 		.browserList img {
 			border        : none !important;
@@ -46,6 +46,9 @@
 		}
 		.browserList li.full {
 			background : radial-gradient(ellipse at center, #b4e391 0%,#61c419 50%,#b4e391 100%);
+		}
+		li > code {
+			font-size : 34px;
 		}
 		section.present ul ul li {
 			margin-bottom : 5px;
@@ -345,7 +348,7 @@
 							<li>Multi-line strings</li>
 							<li>String processing functions (tagged template strings)</li>
 						</ul>
-						<pre><code>var name = 'bob';<br>`my name is ${name}` === 'my name is bob';</code></pre>
+						<pre><code>var name = 'bob';<br>`my name is ${name}` === 'my name is bob'</code></pre>
 						<pre><code>`Here is a <br>Multi-line <br>string`</code></pre>
 					</li>
 				</ul>
@@ -399,7 +402,8 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<p>Returns a string composed of the code point arguments.</p>
+						<pre><code>String.fromCodePoint(55, 78) === '7N'</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -425,7 +429,8 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<p>A built in template string tag.  Returns a string with all escape sequences rendered literally.</p>
+						<pre><code>String.raw`A\nB` !== 'A\nB'</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -451,7 +456,8 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<p>Returns the UTF-16 encoded code point value at the given index of a string.</p>
+						<pre><code>String.fromCodePoint('01234'.codePointAt(3)) === '3'</code></pre>
 					</li>
 				</ul>
 			</section>
