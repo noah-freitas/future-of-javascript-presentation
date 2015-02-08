@@ -7,6 +7,30 @@
 	<link rel="stylesheet" href="css/theme/default.css">
 	<link rel="stylesheet" href="lib/css/zenburn.css">
 	<style>
+		ul.legend {
+			bottom   : -50px;
+			position : fixed;
+			right    : 0;
+		}
+		ul.legend li {
+			display   : inline-block;
+			font-size : 14px;
+		}
+		ul.legend li.full {
+			color : rgba(0, 255, 0, 0.5);
+		}
+		ul.legend li.beta {
+			color : rgba(0, 0, 255, 0.5);
+		}
+		ul.legend li.flag {
+			color : rgba(255, 102, 0, 0.5);
+		}
+		ul.legend li.none {
+			color : rgba(255, 0, 0, 0.5);
+		}
+		ul.legend li.nonstandard {
+			color : rgba(255, 255, 0, 0.5);
+		}
 		ul:not(.browserList) > li {
 			margin-bottom : 45px;
 		}
@@ -19,33 +43,35 @@
 			top             : 10px;
 		}
 		.browserList li {
-			border-radius : 50%;
-			margin        : 0 10px 0 0;
-			height        : 35px;
-			width         : 35px;
+			margin : 0 10px 0 0;
+			height : 35px;
+			width  : 35px;
 		}
 		.browserList img {
-			border        : none !important;
-			margin        : 0 !important;
-			max-width     : 100%;
+			border    : none !important;
+			margin    : 0 !important;
+			max-width : 100%;
 		}
 		.browserList li.none {
-			background : rgba(0, 0, 0, 0.1);
+			background : rgba(255, 0, 0, 0.1);
 		}
 		.browserList li.none img {
 			opacity : 0.1;
 		}
 		.browserList li.beta {
-			background : rgba(100, 50, 150, 0.7);
+			background : rgba(0, 0, 255, 0.5);
 		}
 		.browserList li.flag {
-			background : rgba(255, 160, 0, 0.7);
+			background : rgba(255, 102, 0, 0.5);
 		}
-		.browserList li.beta img, .browserList li.flag img {
+		.browserList li.nonstandard {
+			background : rgba(255, 255, 0, 0.5);
+		}
+		.browserList li.beta img, .browserList li.flag img, .browserList li.nonstandard img {
 			opacity : 0.5;
 		}
 		.browserList li.full {
-			background : radial-gradient(ellipse at center, #b4e391 0%,#61c419 50%,#b4e391 100%);
+			background : rgba(0, 255, 0, 0.5);
 		}
 		section.present ul .browserList + code {
 			display   : block;
@@ -130,6 +156,13 @@
 						<pre><code>0b10 === 2 &amp;&amp; 0B10 === 2</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>Number</h1>
@@ -160,6 +193,13 @@
 						<pre><code>Number.isFinite(NaN)       === false</code></pre>
 						<pre><code>Number.isFinite(1)         === true</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -194,6 +234,13 @@
 						<pre><code>Number.isInteger(0)         === true</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>Number</h1>
@@ -225,6 +272,13 @@
 						<pre><code>Number.isSafeInteger(Math.pow(2, 53) - 1)  === true</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>Number</h1>
@@ -253,6 +307,13 @@
 						<pre><code>Number.isNaN(NaN) === true</code></pre>
 						<pre><code>Number.isNaN(0)   === false</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -283,6 +344,13 @@
 						<pre><code>0.1 + 0.2 - 0.3 === 5.551115123125783e-17</code></pre>
 						<pre><code>0.1 + 0.2 - 0.3 &lt;   Number.EPSILON</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -331,6 +399,13 @@
 						<p>The number <math><mrow><msup><mn>2</mn><mn>53</mn></msup><mo>-</mo><mn>1</mn></mrow></math> or <math><mn>9007199254740991</mn></math></p>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>String</h1>
@@ -364,6 +439,13 @@
 						<pre><code>`Here is a <br>Multi-line <br>string`</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>String</h1>
@@ -390,6 +472,13 @@
 						<p>Allows all Unicode characters to be represented by a single code point value.</p>
 						<pre><code>'\u{1D306}' === '\uD834\uDF06'</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -419,6 +508,13 @@
 						<pre><code>String.fromCodePoint(55, 78) === '7N'</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>String</h1>
@@ -447,6 +543,13 @@
 						<pre><code>String.raw`A\nB` !== 'A\nB'</code></pre>
 					</li>
 				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
 			</section>
 			<section>
 				<h1>String</h1>
@@ -471,9 +574,16 @@
 							</li>
 						</ul>
 						<code>@String, Number -> Number</code>
-						<p>Returns the UTF-16 encoded code point value at the given index of a string.</p>
+						<p>Returns the UTF-16 encoded code point value at the given index of the receiving string.</p>
 						<pre><code>String.fromCodePoint('01234'.codePointAt(3)) === '3'</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -499,9 +609,16 @@
 							</li>
 						</ul>
 						<code>@String, String -> String</code>
-						<p>Returns the "Unicode Normalization Form" of the <code>this</code> value string, according to the specified form.</p>
+						<p>Returns the "Unicode Normalization Form" of the receiving string, according to the specified form.</p>
 						<pre><code>'\u1E9B\u0323'.normalize('NFKC') !== '\u1E9B\u0323'.normalize('NFD')</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -527,9 +644,16 @@
 							</li>
 						</ul>
 						<code>@String, Number -> String</code>
-						<p>Returns a new string formed by concatenating the <code>this</code> value string with it self the specified number of times.</p>
+						<p>Returns a new string formed by concatenating the receiving string with it self the specified number of times.</p>
 						<pre><code>'abc'.repeat(4) === 'abcabcabcabc'</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -554,8 +678,19 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<code>@String, String -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string begins with the passed string, <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.startsWith('abc')  === true</code></pre>
+						<pre><code>' abcdefg'.startsWith('abc') === false</code></pre>
+						<pre><code>'abcdefg'.startsWith('')     === true</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -580,8 +715,19 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<code>@String, String -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string ends with the passed string, <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.endsWith('efg')  === true</code></pre>
+						<pre><code>'abcdefg '.endsWith('efg') === false</code></pre>
+						<pre><code>'abcdefg'.endsWith('')     === true</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -590,10 +736,10 @@
 					<li>
 						<code>String.prototype.includes</code>
 						<ul class="browserList">
-							<li class="full">
+							<li class="beta">
 								<img src="images/chrome.png">
 							</li>
-							<li class="full">
+							<li class="nonstandard">
 								<img src="images/firefox.png">
 							</li>
 							<li class="none">
@@ -602,12 +748,23 @@
 							<li class="none">
 								<img src="images/safari.png">
 							</li>
-							<li class="none">
+							<li class="flag">
 								<img src="images/node.svg">
 							</li>
 						</ul>
-						<p></p>
+						<code>@String, String, Number -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string has a substring matching the passed string, beginning at the passed index; <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.includes('efg')    === true</code></pre>
+						<pre><code>'abcdefg'.includes('abc', 4) === false</code></pre>
+						<pre><code>'abcdefg'.includes('')       === true</code></pre>
 					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
@@ -635,17 +792,76 @@
 						<p></p>
 					</li>
 				</ul>
-			</section>
-			<section>
-				<h1>Symbol</h1>
-				<ul>
-					<li><code>Symbol</code></li>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 			<section>
 				<h1>Symbol</h1>
 				<ul>
-					<li><code>Symbol.for</code></li>
+					<li>
+						<code>Symbol</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.for</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
 				</ul>
 			</section>
 		</div>
