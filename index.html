@@ -789,6 +789,10 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
+						<code>String -> Symbol</code>
+						<p>Returns a new Symbol with the passed string label.  The label is not unique.</p>
+						<pre><code>Symbol('abc') !== Symbol('abc')</code></pre>
+						<pre><code>var prop  = Symbol(),<br>    obj   = {};<br>obj[prop] = 'My value';<br><br>obj[prop]     === 'My value'<br>obj[Symbol()] === undefined</code></pre>
 					</li>
 				</ul>
 				<ul class="legend">
@@ -821,6 +825,227 @@
 								<img src="images/node.svg">
 							</li>
 						</ul>
+						<code>String -> Symbol</code>
+						<p>Returns the shared symbol from the global symbol registry for the provided string.</p>
+						<pre><code>Symbol.for('abc') === Symbol.for('abc')</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.keyFor</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>Symbol -> String</code>
+						<p>Returns the string key for the passed symbol in the global symbol registry.</p>
+						<pre><code>Symbol.keyFor(Symbol.for('abc')) === 'abc'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.hasInstance</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>instanceof</code> operator.</p>
+					</li>
+					<li>
+						<code>Symbol.isConcatSpreadable</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>Array.prototype.concat</code>.</p>
+					</li>
+					<li>
+						<code>Symbol.iterator</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes for...of loops.</p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.species</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Reference to an object's constructor function.</p>
+					</li>
+					<li>
+						<code>Symbol.toPrimitive</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes internal ToPrimitive operation.</p>
+					</li>
+					<li>
+						<code>Symbol.toStringTag</code>
+						<ul class="browserList">
+							<li class="flag">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes object's stringification.</p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.unscopables</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>with</code> operator.</p>
 					</li>
 				</ul>
 				<ul class="legend">
