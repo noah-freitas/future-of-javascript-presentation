@@ -1,3 +1,2 @@
-ES5 & ES.Next
+ES6: The Primitives
 =============
-The Present and (Near) Future of JavaScript
