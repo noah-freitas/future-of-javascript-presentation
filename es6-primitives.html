@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ES6: Primitives</title>
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/default.css">
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+	<style>
+		ul.legend {
+			bottom   : -50px;
+			position : fixed;
+			right    : 0;
+		}
+		ul.legend li {
+			display   : inline-block;
+			font-size : 14px;
+		}
+		ul.legend li.full {
+			color : rgba(0, 255, 0, 0.5);
+		}
+		ul.legend li.beta {
+			color : rgba(0, 0, 255, 0.5);
+		}
+		ul.legend li.flag {
+			color : rgba(255, 102, 0, 0.5);
+		}
+		ul.legend li.none {
+			color : rgba(255, 0, 0, 0.5);
+		}
+		ul.legend li.nonstandard {
+			color : rgba(255, 255, 0, 0.5);
+		}
+		ul:not(.browserList) > li {
+			margin-bottom : 45px;
+		}
+		ul.browserList {
+			display         : inline-flex !important;
+			flex-direction  : row;
+			list-style-type : none !important;
+			margin-bottom   : 30px;
+			position        : relative;
+			top             : 10px;
+		}
+		.browserList li {
+			margin : 0 10px 0 0;
+			height : 35px;
+			width  : 35px;
+		}
+		.browserList img {
+			border    : none !important;
+			margin    : 0 !important;
+			max-width : 100%;
+		}
+		.browserList li.none {
+			background : rgba(255, 0, 0, 0.1);
+		}
+		.browserList li.none img {
+			opacity : 0.1;
+		}
+		.browserList li.beta {
+			background : rgba(0, 0, 255, 0.5);
+		}
+		.browserList li.flag {
+			background : rgba(255, 102, 0, 0.5);
+		}
+		.browserList li.nonstandard {
+			background : rgba(255, 255, 0, 0.5);
+		}
+		.browserList li.beta img, .browserList li.flag img, .browserList li.nonstandard img {
+			opacity : 0.5;
+		}
+		.browserList li.full {
+			background : rgba(0, 255, 0, 0.5);
+		}
+		section.present ul .browserList + code {
+			display   : block;
+			font-size : 18px;
+			position  : relative;
+			top       : -30px;
+		}
+		section.present ul li > code {
+			font-size : 34px;
+		}
+		section.present ul ul li {
+			margin-bottom : 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<hgroup>
+					<h1>ES6</h1>
+					<h2>The Primitives</h2>
+				</hgroup>
+			</section>
+			<section>
+				<h1>Goal</h1>
+				<ul>
+					<li>Review ECMAScript Version 6 extensions and changes to the primitive values, with:
+						<ul>
+							<li>Support in current environments</li>
+							<li>Function types</li>
+							<li>Simple code examples</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						Octal Literals
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Base 8 number literal syntax</p>
+						<pre><code>0o10 === 8 &amp;&amp; 0O10 === 8</code></pre>
+					</li>
+					<li>
+						Binary Literals
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Base 2 number literal syntax</p>
+						<pre><code>0b10 === 2 &amp;&amp; 0B10 === 2</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.isFinite</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>Number -> Boolean</code>
+						<p>Returns <code>false</code> for <code>Infinity</code> and <code>NaN</code>, <code>true</code> otherwise</p>
+						<pre><code>Number.isFinite(Infinity)  === false</code></pre>
+						<pre><code>Number.isFinite(-Infinity) === false</code></pre>
+						<pre><code>Number.isFinite(NaN)       === false</code></pre>
+						<pre><code>Number.isFinite(1)         === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.isInteger</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>Number -> Boolean</code>
+						<p>Returns <code>true</code> if the input is an integer, <code>false</code> otherwise.</p>
+						<pre><code>Number.isInteger(Infinity)  === false</code></pre>
+						<pre><code>Number.isInteger(-Infinity) === false</code></pre>
+						<pre><code>Number.isInteger(NaN)       === false</code></pre>
+						<pre><code>Number.isInteger(1.1)       === false</code></pre>
+						<pre><code>Number.isInteger(1)         === true</code></pre>
+						<pre><code>Number.isInteger(0)         === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.isSafeInteger</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>Number -> Boolean</code>
+						<p>Returns <code>true</code> for integers between <math><msup><mn>-2</mn><mn>53</mn></msup></math> and <math><msup><mn>2</mn><mn>53</mn></msup></math>, <code>false</code> for other values.</p>
+						<pre><code>Number.isSafeInteger(-Math.pow(2, 53))     === false</code></pre>
+						<pre><code>Number.isSafeInteger(-Math.pow(2, 53) + 1) === true</code></pre>
+						<pre><code>Number.isSafeInteger(Math.pow(2, 53))      === false</code></pre>
+						<pre><code>Number.isSafeInteger(Math.pow(2, 53) - 1)  === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.isNaN</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>a -> Boolean</code>
+						<p>Returns <code>true</code> for <code>NaN</code>, <code>false</code> otherwise.</p>
+						<pre><code>Number.isNaN(NaN) === true</code></pre>
+						<pre><code>Number.isNaN(0)   === false</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.EPSILON</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>The value <math><msup><mn>2</mn><mn>-52</mn></msup></math>.  Very loosely, the smallest difference that can be represented as a Number.</p>
+						<pre><code>Number.EPSILON  === Math.pow(2, -52) === 2.220446049250313e-16</code></pre>
+						<pre><code>0.1 + 0.2       !== 0.3</code></pre>
+						<pre><code>0.1 + 0.2 - 0.3 === 5.551115123125783e-17</code></pre>
+						<pre><code>0.1 + 0.2 - 0.3 &lt;   Number.EPSILON</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Number</h1>
+				<ul>
+					<li>
+						<code>Number.MIN_SAFE_INTEGER</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>The number <math><mrow><msup><mn>-2</mn><mn>53</mn></msup><mo>-</mo><mn>1</mn></mrow></math> or <math><mn>-9007199254740991</mn></math></p>
+					</li>
+					<li>
+						<code>Number.MAX_SAFE_INTEGER</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>The number <math><mrow><msup><mn>2</mn><mn>53</mn></msup><mo>-</mo><mn>1</mn></mrow></math> or <math><mn>9007199254740991</mn></math></p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						Template Strings
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>A new type of string literal allowing:</p>
+						<ul>
+							<li>Value interpolation</li>
+							<li>Multi-line strings</li>
+							<li>String processing functions (tagged template strings)</li>
+						</ul>
+						<pre><code>var name = 'bob';<br>`my name is ${name}` === 'my name is bob'</code></pre>
+						<pre><code>`Here is a <br>Multi-line <br>string`</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						Unicode code point escapes
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Allows all Unicode characters to be represented by a single code point value.</p>
+						<pre><code>'\u{1D306}' === '\uD834\uDF06'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.fromCodePoint</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>...[Number] -> String</code>
+						<p>Returns a string composed of the code point arguments.</p>
+						<pre><code>String.fromCodePoint(55, 78) === '7N'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.raw</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>[String], ...[*] -> String</code>
+						<p>A built in template string tag.  Returns a string with all escape sequences rendered literally.</p>
+						<pre><code>String.raw`A\nB` !== 'A\nB'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.codePointAt</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, Number -> Number</code>
+						<p>Returns the UTF-16 encoded code point value at the given index of the receiving string.</p>
+						<pre><code>String.fromCodePoint('01234'.codePointAt(3)) === '3'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.normalize</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, String -> String</code>
+						<p>Returns the "Unicode Normalization Form" of the receiving string, according to the specified form.</p>
+						<pre><code>'\u1E9B\u0323'.normalize('NFKC') !== '\u1E9B\u0323'.normalize('NFD')</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.repeat</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, Number -> String</code>
+						<p>Returns a new string formed by concatenating the receiving string with it self the specified number of times.</p>
+						<pre><code>'abc'.repeat(4) === 'abcabcabcabc'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.startsWith</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, String -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string begins with the passed string, <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.startsWith('abc')  === true</code></pre>
+						<pre><code>' abcdefg'.startsWith('abc') === false</code></pre>
+						<pre><code>'abcdefg'.startsWith('')     === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.endsWith</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, String -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string ends with the passed string, <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.endsWith('efg')  === true</code></pre>
+						<pre><code>'abcdefg '.endsWith('efg') === false</code></pre>
+						<pre><code>'abcdefg'.endsWith('')     === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>String</h1>
+				<ul>
+					<li>
+						<code>String.prototype.includes</code>
+						<ul class="browserList">
+							<li class="beta">
+								<img src="images/chrome.png">
+							</li>
+							<li class="nonstandard">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>@String, String, Number -> Boolean</code>
+						<p>Returns <code>true</code> if the receiving string has a substring matching the passed string, beginning at the passed index; <code>false</code> otherwise.</p>
+						<pre><code>'abcdefg'.includes('efg')    === true</code></pre>
+						<pre><code>'abcdefg'.includes('abc', 4) === false</code></pre>
+						<pre><code>'abcdefg'.includes('')       === true</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>String -> Symbol</code>
+						<p>Returns a new Symbol with the passed string label.  The label is not unique.</p>
+						<pre><code>Symbol('abc') !== Symbol('abc')</code></pre>
+						<pre><code>var prop  = Symbol(),<br>    obj   = {};<br>obj[prop] = 'My value';<br><br>obj[prop]     === 'My value'<br>obj[Symbol()] === undefined</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.for</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>String -> Symbol</code>
+						<p>Returns the shared symbol from the global symbol registry for the provided string.</p>
+						<pre><code>Symbol.for('abc') === Symbol.for('abc')</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.keyFor</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<code>Symbol -> String</code>
+						<p>Returns the string key for the passed symbol in the global symbol registry.</p>
+						<pre><code>Symbol.keyFor(Symbol.for('abc')) === 'abc'</code></pre>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.hasInstance</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>instanceof</code> operator.</p>
+					</li>
+					<li>
+						<code>Symbol.isConcatSpreadable</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>Array.prototype.concat</code>.</p>
+					</li>
+					<li>
+						<code>Symbol.iterator</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="full">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes for...of loops.</p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.species</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Reference to an object's constructor function.</p>
+					</li>
+					<li>
+						<code>Symbol.toPrimitive</code>
+						<ul class="browserList">
+							<li class="none">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="none">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes internal ToPrimitive operation.</p>
+					</li>
+					<li>
+						<code>Symbol.toStringTag</code>
+						<ul class="browserList">
+							<li class="flag">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="none">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="flag">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes object's stringification.</p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Symbol</h1>
+				<ul>
+					<li>
+						<code>Symbol.unscopables</code>
+						<ul class="browserList">
+							<li class="full">
+								<img src="images/chrome.png">
+							</li>
+							<li class="none">
+								<img src="images/firefox.png">
+							</li>
+							<li class="beta">
+								<img src="images/ie.png">
+							</li>
+							<li class="none">
+								<img src="images/safari.png">
+							</li>
+							<li class="full">
+								<img src="images/node.svg">
+							</li>
+						</ul>
+						<p>Customizes <code>with</code> operator.</p>
+					</li>
+				</ul>
+				<ul class="legend">
+					<li class="full">Full</li>
+					<li class="beta">Beta</li>
+					<li class="flag">Flag</li>
+					<li class="none">None</li>
+					<li class="nonstandard">Non-Standard</li>
+				</ul>
+			</section>
+		</div>
+		</div>
+		<script src="js/reveal.min.js"></script>
+		<script>Reveal.initialize();</script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</body>
+</html>

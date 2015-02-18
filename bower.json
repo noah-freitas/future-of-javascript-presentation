@@ -1,0 +1,22 @@
+{
+  "name": "future-of-javascript-presentation",
+  "version": "0.0.0",
+  "homepage": "https://github.com/noah-freitas/future-of-javascript-presentation",
+  "authors": [
+    "Noah Freitas <noah.j.freitas@gmail.com>"
+  ],
+  "description": "Talks on the future of JavaScript.",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~3.0.0",
+    "highlightjs": "~8.4.0"
+  }
+}
