@@ -8,10 +8,81 @@
 	<link rel="stylesheet" href="bower_components/highlightjs/styles/dark.css">
 	<style>
 		ul.legend, ul.browserList, ul.legend *, ul.browserList * {
-			display : none;
+			/*display : none;*/
 		}
 		div.slides > section > ul {
 			list-style-type : none;
+		}
+		pre.inline {
+			display    : block;
+			text-align : center;
+		}
+		pre.one40 {
+			width : 140px;
+		}
+
+		ul.browserList {
+			display         : inline-flex !important;
+			flex-direction  : row;
+			list-style-type : none !important;
+			margin-bottom   : 30px;
+			position        : relative;
+			top             : 10px;
+		}
+		.browserList li {
+			margin : 0 10px 0 0;
+			height : 35px;
+			width  : 35px;
+		}
+		.browserList img {
+			border    : none !important;
+			margin    : 0 !important;
+			max-width : 100%;
+		}
+		.browserList li.none {
+			background : rgba(255, 0, 0, 0.1);
+		}
+		.browserList li.none img {
+			opacity : 0.1;
+		}
+		.browserList li.beta {
+			background : rgba(0, 0, 255, 0.5);
+		}
+		.browserList li.flag {
+			background : rgba(255, 102, 0, 0.5);
+		}
+		.browserList li.nonstandard {
+			background : rgba(255, 255, 0, 0.5);
+		}
+		.browserList li.beta img, .browserList li.flag img, .browserList li.nonstandard img {
+			opacity : 0.5;
+		}
+		.browserList li.full {
+			background : rgba(0, 255, 0, 0.5);
+		}
+		ul.legend {
+			bottom   : -50px;
+			position : fixed;
+			right    : 0;
+		}
+		ul.legend li {
+			display   : inline-block;
+			font-size : 14px;
+		}
+		ul.legend li.full {
+			color : rgba(0, 255, 0, 0.5);
+		}
+		ul.legend li.beta {
+			color : rgba(0, 0, 255, 0.5);
+		}
+		ul.legend li.flag {
+			color : rgba(255, 102, 0, 0.5);
+		}
+		ul.legend li.none {
+			color : rgba(255, 0, 0, 0.5);
+		}
+		ul.legend li.nonstandard {
+			color : rgba(255, 255, 0, 0.5);
 		}
 	</style>
 </head>
@@ -34,11 +105,28 @@
 			</section>
 			<section>
 				<h1><code>let</code></h1>
-				<ul>
-					<li>lexically scoped</li>
-					<li>block scoped</li>
+				<ul class="browserList">
+					<li class="beta">
+						<img src="images/chrome.png">
+					</li>
+					<li class="flag">
+						<img src="images/firefox.png">
+					</li>
+					<li class="beta">
+						<img src="images/ie.png">
+					</li>
+					<li class="none">
+						<img src="images/safari.png">
+					</li>
+					<li class="flag">
+						<img src="images/node.svg">
+					</li>
 				</ul>
-				<pre class="fragment"><code>let x = 3;</code></pre>
+				<ul>
+					<li>block scoped</li>
+					<li>lexically scoped</li>
+				</ul>
+				<pre class="fragment inline one40"><code>let x = 3;</code></pre>
 				<ul class="legend">
 					<li class="full">Full</li>
 					<li class="beta">Beta</li>
@@ -55,20 +143,31 @@
 }
 
 x === 3
-y === undefined
+y // ReferenceError: y is not defined
 </code></pre>
 <pre class="fragment"><code>if (let x = getValue()) {
     // x === the result of `getValue()`
 }
 
-x === undefined</code></pre>
-<pre class="fragment"><code>while (let x = Math.random()) {
-    if (Math.abs(x - 0.2) &lt; Number.EPISILON) break;
-    // do something with a random number.
-}</code></pre>
+x // ReferenceError: x is not defined</code></pre>
 			</section>
 			<section>
 				<h1>lexically scoped</h1>
+				<ul>
+					<li>"temporal deadzone"</li>
+					<li><code>TypeError</code>s for redeclaration in blocks</li>
+				</ul>
+<pre class="fragment"><code>if (true) {
+    x; // ReferenceError: can't access
+       // let declaration `x' before initialization
+
+    let x = 3;
+
+    x = 5;
+
+    let x = 4; // TypeError: redeclaration of variable x
+    var x = 5; // TypeError: redeclaration of let x
+}</code></pre>
 			</section>
 			<section>
 				<h1><code>const</code></h1>
