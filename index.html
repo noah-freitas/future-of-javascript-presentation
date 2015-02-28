@@ -7,9 +7,6 @@
 	<link rel="stylesheet" href="bower_components/revealjs/css/theme/simple.css">
 	<link rel="stylesheet" href="bower_components/highlightjs/styles/dark.css">
 	<style>
-		ul.legend, ul.browserList, ul.legend *, ul.browserList * {
-			/*display : none;*/
-		}
 		div.slides > section > ul {
 			list-style-type : none;
 		}
@@ -30,35 +27,91 @@
 			top             : 10px;
 		}
 		.browserList li {
-			margin : 0 10px 0 0;
-			height : 35px;
-			width  : 35px;
+			height   : 35px;
+			margin   : 0 10px 0 0;
+			position : relative;
+			width    : 35px;
 		}
 		.browserList img {
-			border    : none !important;
-			margin    : 0 !important;
-			max-width : 100%;
+			border         : none !important;
+			display        : block;
+			height         : 100%;
+			margin         : 0 !important;
+			max-height     : 100%;
+			max-width      : 100% !important;
+			min-height     : 100%;
+			min-width      : 100% !important;
+			width          : 100%;
+			vertical-align : top;
 		}
 		.browserList li.none {
 			background : rgba(255, 0, 0, 0.1);
+			height     : 50px;
+			width      : 50px;
 		}
 		.browserList li.none img {
 			opacity : 0.1;
 		}
 		.browserList li.beta {
 			background : rgba(0, 0, 255, 0.5);
+			height     : 150px;
+			width      : 150px;
 		}
 		.browserList li.flag {
 			background : rgba(255, 102, 0, 0.5);
+			height     : 100px;
+			width      : 100px;
 		}
 		.browserList li.nonstandard {
 			background : rgba(255, 255, 0, 0.5);
+			height     : 175px;
+			width      : 175px;
 		}
-		.browserList li.beta img, .browserList li.flag img, .browserList li.nonstandard img {
+		.browserList li.beta img, .browserList li.flag img {
 			opacity : 0.5;
+		}
+		.browserList li.full img, .browserList li.nonstandard img {
+			opacity : 0.8;
 		}
 		.browserList li.full {
 			background : rgba(0, 255, 0, 0.5);
+			height     : 200px;
+			width      : 200px;
+		}
+		.browserList li.full:before {
+			color    : rgba(0, 255, 0, 0.8);
+			content  : 'Full';
+			position : absolute;
+			top      : -50px;
+			left     : 70px;
+		}
+		.browserList li.nonstandard:before {
+			color     : rgba(255, 255, 0, 0.8);
+			content   : 'Partial';
+			position  : absolute;
+			top       : -50px;
+			left      : 35px;
+		}
+		.browserList li.beta:before {
+			color    : rgba(0, 0, 255, 0.8);
+			content  : 'Future';
+			position : absolute;
+			top      : -50px;
+			left     : 25px;
+		}
+		.browserList li.flag:before {
+			color    : rgba(255, 102, 0, 0.8);
+			content  : 'Flag';
+			position : absolute;
+			top      : -50px;
+			left     : 20px;
+		}
+		.browserList li.none:before {
+			color    : rgba(255, 0, 0, 0.8);
+			content  : '\2205';
+			position : absolute;
+			top      : -50px;
+			left     : 10px;
 		}
 		ul.legend {
 			bottom   : -50px;
@@ -106,13 +159,13 @@
 			<section>
 				<h1><code>let</code></h1>
 				<ul class="browserList">
-					<li class="beta">
+					<li class="nonstandard">
 						<img src="images/chrome.png">
 					</li>
 					<li class="flag">
 						<img src="images/firefox.png">
 					</li>
-					<li class="beta">
+					<li class="nonstandard">
 						<img src="images/ie.png">
 					</li>
 					<li class="none">
@@ -122,18 +175,14 @@
 						<img src="images/node.svg">
 					</li>
 				</ul>
+			</section>
+			<section>
+				<h1><code>let</code></h1>
 				<ul>
 					<li>block scoped</li>
 					<li>lexically scoped</li>
 				</ul>
 				<pre class="fragment inline one40"><code>let x = 3;</code></pre>
-				<ul class="legend">
-					<li class="full">Full</li>
-					<li class="beta">Beta</li>
-					<li class="flag">Flag</li>
-					<li class="none">None</li>
-					<li class="nonstandard">Non-Standard</li>
-				</ul>
 			</section>
 			<section>
 				<h1>block scoped</h1>
@@ -171,22 +220,42 @@ x // ReferenceError: x is not defined</code></pre>
 			</section>
 			<section>
 				<h1><code>const</code></h1>
-				<ul class="legend">
-					<li class="full">Full</li>
-					<li class="beta">Beta</li>
-					<li class="flag">Flag</li>
-					<li class="none">None</li>
-					<li class="nonstandard">Non-Standard</li>
+				<ul class="browserList">
+					<li class="nonstandard">
+						<img src="images/chrome.png">
+					</li>
+					<li class="full">
+						<img src="images/firefox.png">
+					</li>
+					<li class="full">
+						<img src="images/ie.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/safari.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/node.svg">
+					</li>
 				</ul>
 			</section>
 			<section>
 				<h1>Destructuring</h1>
-				<ul class="legend">
-					<li class="full">Full</li>
-					<li class="beta">Beta</li>
-					<li class="flag">Flag</li>
-					<li class="none">None</li>
-					<li class="nonstandard">Non-Standard</li>
+				<ul class="browserList">
+					<li class="none">
+						<img src="images/chrome.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/firefox.png">
+					</li>
+					<li class="none">
+						<img src="images/ie.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/safari.png">
+					</li>
+					<li class="none">
+						<img src="images/node.svg">
+					</li>
 				</ul>
 			</section>
 		</div>
