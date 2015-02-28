@@ -153,7 +153,13 @@
 				<ol>
 					<li class="fragment"><code>let</code></li>
 					<li class="fragment"><code>const</code></li>
-					<li class="fragment">Destructuring</li>
+					<li class="fragment">
+						Destructuring
+						<ul class="fragment">
+							<li><code>...</code> rest operator</li>
+							<li>default values</li>
+						</ul>
+					</li>
 				</ol>
 			</section>
 			<section>
@@ -186,7 +192,7 @@
 			</section>
 			<section>
 				<h1>block scoped</h1>
-<pre class="fragment"><code>if (true) {
+<pre><code>if (true) {
     var x = 3;
     let y = 3;
 }
@@ -194,11 +200,16 @@
 x === 3
 y // ReferenceError: y is not defined
 </code></pre>
-<pre class="fragment"><code>if (let x = getValue()) {
-    // x === the result of `getValue()`
-}
+			</section>
+			<section>
+				<h1>block scoped</h1>
+<pre><code>var funcs = [];
 
-x // ReferenceError: x is not defined</code></pre>
+for (let i = 0; i &lt; 10; i++)
+    funcs.push(function () { return i; });
+
+funcs[0]() === 0
+i // ReferenceError: i is not defined</code></pre>
 			</section>
 			<section>
 				<h1>lexically scoped</h1>
@@ -206,7 +217,10 @@ x // ReferenceError: x is not defined</code></pre>
 					<li>"temporal deadzone"</li>
 					<li><code>TypeError</code>s for redeclaration in blocks</li>
 				</ul>
-<pre class="fragment"><code>if (true) {
+			</section>
+			<section>
+				<h1>lexically scoped</h1>
+<pre><code>if (true) {
     x; // ReferenceError: can't access
        // let declaration `x' before initialization
 
@@ -239,6 +253,14 @@ x // ReferenceError: x is not defined</code></pre>
 				</ul>
 			</section>
 			<section>
+				<h1><code>const</code></h1>
+				<ul>
+					<li>Single assignment</li>
+					<li class="fragment">Must be assigned value</li>
+					<li class="fragment"><pre><code>const PI = Math.PI;</code></pre></li>
+				</ul>
+			</section>
+			<section>
 				<h1>Destructuring</h1>
 				<ul class="browserList">
 					<li class="none">
@@ -257,6 +279,33 @@ x // ReferenceError: x is not defined</code></pre>
 						<img src="images/node.svg">
 					</li>
 				</ul>
+			</section>
+			<section>
+				<h1>Destructuring</h1>
+				<ul>
+					<li>Object and Array literal-like syntax for assignment.</li>
+					<li class="fragment">Declarative assignment.</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Destructuring: Objects</h1>
+<pre><code>let { a : a } = { a : 2 };
+a === 2</code></pre>
+<pre class="fragment"><code>// Desugared:
+var b = { a : 2 };
+var a = b.a;
+a === 2</code></pre>
+<pre class="fragment"><code>let { a } = { a : 2 };
+a === 2</code></pre>
+			</section>
+			<section>
+				<h1>Destructuring: Arrays</h1>
+<pre><code>let [x] = [1];
+x === 1</code></pre>
+<pre class="fragment"><code>// Desugared:
+var y = [1];
+var x = y[0];
+x === 1</code></pre>
 			</section>
 		</div>
 		</div>
