@@ -214,22 +214,21 @@ i // ReferenceError: i is not defined</code></pre>
 			<section>
 				<h1>lexically scoped</h1>
 				<ul>
-					<li>"temporal deadzone"</li>
-					<li class="fragment"><code>TypeError</code>s for redeclaration in blocks</li>
+					<li>The "Temporal Deadzone"</li>
+					<li class="fragment"><code>Error</code>s for redeclaration in blocks</li>
 				</ul>
 			</section>
 			<section>
 				<h1>lexically scoped</h1>
 <pre><code>if (true) {
-    x; // ReferenceError: can't access
-       // let declaration `x' before initialization
+    x = 5; // ReferenceError: x is not defined
 
     let x = 3;
 
     x = 5;
 
-    let x = 4; // TypeError: redeclaration of variable x
-    var x = 5; // TypeError: redeclaration of let x
+    let x = 4; // SyntaxError: Identifier 'x' has already been declared
+    var x = 5; // SyntaxError: Identifier 'x' has already been declared
 }</code></pre>
 			</section>
 			<section>
