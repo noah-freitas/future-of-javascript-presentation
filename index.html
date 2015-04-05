@@ -417,7 +417,7 @@ function alertText({ target : { textContent : text } }) {
 			</section>
 			<section>
 				<h1>Dest. Parameters</h1>
-<pre><code>function weirdAdd({ a : [x = 1, ...ys] }, { b } = { b : 16 }) {
+<pre class="html"><code>function weirdAdd({ a : [x = 1, ...ys] }, { b } = { b : 16 }) {
 	return x * 2 + ys.reduce((x, y) => x + y, 0) + Math.sqrt(b);
 }
 
