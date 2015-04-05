@@ -398,13 +398,13 @@ a === 3</code></pre>
 			<section>
 				<h1>Dest. Parameters</h1>
 <pre><code>function add(...nums) {
-	return nums.reduce(function (x, y) { return x + y; }, 0);
+  return nums.reduce(function (x, y) { return x + y; }, 0);
 }
 
 add(1, 2, 3, 4) === 10
 add()           === 0</code></pre>
 <pre class="fragment"><code>function add(x = 0, y = 0) {
-	return x + y;
+  return x + y;
 }
 
 add()  === 0;
@@ -412,17 +412,18 @@ add(1) === 1;</code></pre>
 <pre class="fragment"><code>document.querySelector('button').addEventListener('click', alertText);
 
 function alertText({ target : { textContent : text } }) {
-	alert(text);
+  alert(text);
 }</code></pre>
 			</section>
 			<section>
 				<h1>Dest. Parameters</h1>
 <pre class="html"><code>function weirdAdd({ a : [x = 1, ...ys] }, { b } = { b : 16 }) {
-	return x * 2 + ys.reduce((x, y) => x + y, 0) + Math.sqrt(b);
+  return x * 2 + ys.reduce((x, y) => x + y, 0) + Math.sqrt(b);
 }
 
-weirdAdd({ a : [1, 2, 3] }, { b : 4 }) === 9
-weirdAdd({ a : [] })                   === 6</code></pre>
+<span class="fragment">weirdAdd({ a : [1, 2, 3] }, { b : 4 }) ===</span> <span class="fragment">9</span>
+<span class="fragment">weirdAdd({ a : [] })                   ===</span> <span class="fragment">6</span>
+<span class="fragment">weirdAdd()                             ===</span> <span class="fragment">// TypeError</span></code></pre>
 			</section>
 		</div>
 		</div>
