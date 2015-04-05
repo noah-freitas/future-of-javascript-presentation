@@ -303,6 +303,47 @@ x === 1</code></pre>
 <pre class="fragment"><code>// Desugared:
 var y = [1], x = y[0];
 x === 1</code></pre>
+<pre class="fragment"><code>let [a, , b, c] = [1, 2, 3, 4];
+a === 1
+b === 3
+c === 4</code></pre>
+			</section>
+			<section>
+				<h1>The Rest Operator</h1>
+				<ul class="browserList">
+					<li class="none">
+						<img src="images/chrome.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/firefox.png">
+					</li>
+					<li class="beta">
+						<img src="images/ie.png">
+					</li>
+					<li class="none">
+						<img src="images/safari.png">
+					</li>
+					<li class="none">
+						<img src="images/node.svg">
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h1>The Rest Operator</h1>
+				<ul>
+					<li>Gathers 0+ elements from a matched list into a new array.</li>
+					<li>Allows for functional head/tail array destructuring.</li>
+				</ul>
+<pre class="fragment"><code>let [head, ...tail] = [1, 2, 3, 4];
+head === 1
+tail === [2, 3, 4]</code></pre>
+<pre class="fragment"><code>let [head, ...tail] = [];
+head === undefined
+tail === []</code></pre>
+<pre class="fragment"><code>let [a, b, ...cs] = [1, 2, 3];
+a  === 1
+b  === 2
+cs === [3]</code></pre>
 			</section>
 		</div>
 		</div>
