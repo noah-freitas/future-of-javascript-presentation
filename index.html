@@ -5,7 +5,7 @@
 	<title>ES6: Names</title>
 	<link rel="stylesheet" href="bower_components/revealjs/css/reveal.css">
 	<link rel="stylesheet" href="bower_components/revealjs/css/theme/simple.css">
-	<link rel="stylesheet" href="bower_components/highlightjs/styles/dark.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/sunburst.min.css">
 	<style>
 		div.slides > section > ul {
 			list-style-type : none;
@@ -386,11 +386,49 @@ a === 3</code></pre>
 <pre class="fragment"><code>let ([{ a = 3 } = {}] = []) = undefined;
 a === 3</code></pre>
 			</section>
+			<section>
+				<h1>Dest. Parameters</h1>
+				<ul>
+					<li>Destructured value is the actual parameter</li>
+					<li>Destructuring pattern is the formal parameter</li>
+					<li class="fragment">Each parameter can have its own pattern</li>
+					<li class="fragment">The rest operator can destructure the parameter list itself</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Dest. Parameters</h1>
+<pre><code>function add(...nums) {
+	return nums.reduce(function (x, y) { return x + y; }, 0);
+}
+
+add(1, 2, 3, 4) === 10
+add()           === 0</code></pre>
+<pre class="fragment"><code>function add(x = 0, y = 0) {
+	return x + y;
+}
+
+add()  === 0;
+add(1) === 1;</code></pre>
+<pre class="fragment"><code>document.querySelector('button').addEventListener('click', alertText);
+
+function alertText({ target : { textContent : text } }) {
+	alert(text);
+}</code></pre>
+			</section>
+			<section>
+				<h1>Dest. Parameters</h1>
+<pre><code>function weirdAdd({ a : [x = 1, ...ys] }, { b } = { b : 16 }) {
+	return x * 2 + ys.reduce((x, y) => x + y, 0) + Math.sqrt(b);
+}
+
+weirdAdd({ a : [1, 2, 3] }, { b : 4 }) === 9
+weirdAdd({ a : [] })                   === 6</code></pre>
+			</section>
 		</div>
 		</div>
 		<script src="bower_components/revealjs/js/reveal.js"></script>
 		<script>Reveal.initialize();</script>
-		<script src="bower_components/highlightjs/highlight.pack.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 	</body>
 </html>
