@@ -283,11 +283,17 @@ i // ReferenceError: i is not defined</code></pre>
 				<h1>Destructuring</h1>
 				<ul>
 					<li>Object and Array literal-like syntax for assignment.</li>
-					<li class="fragment">Declarative assignment.</li>
+					<li class="fragment">Declarative assignment</li>
+					<li class="fragment">Two pieces:
+						<ul>
+							<li>The value being destructured/matched.</li>
+							<li>The pattern used for matching/destructuring.</li>
+						</ul>
+					</li>
 				</ul>
 			</section>
 			<section>
-				<h1>Destructuring: Objects</h1>
+				<h1>Destruct. Objects</h1>
 <pre><code>let { a : a } = { a : 2 };
 a === 2</code></pre>
 <pre class="fragment"><code>// Desugared:
@@ -297,7 +303,7 @@ a === 2</code></pre>
 a === 2</code></pre>
 			</section>
 			<section>
-				<h1>Destructuring: Arrays</h1>
+				<h1>Destruct. Arrays</h1>
 <pre><code>let [x] = [1];
 x === 1</code></pre>
 <pre class="fragment"><code>// Desugared:
@@ -309,7 +315,7 @@ b === 3
 c === 4</code></pre>
 			</section>
 			<section>
-				<h1>The Rest Operator</h1>
+				<h1>Rest Operator</h1>
 				<ul class="browserList">
 					<li class="none">
 						<img src="images/chrome.png">
@@ -329,7 +335,7 @@ c === 4</code></pre>
 				</ul>
 			</section>
 			<section>
-				<h1>The Rest Operator</h1>
+				<h1>Rest Operator</h1>
 				<ul>
 					<li>Gathers 0+ elements from a matched list into a new array.</li>
 					<li>Allows for functional head/tail array destructuring.</li>
@@ -344,6 +350,41 @@ tail === []</code></pre>
 a  === 1
 b  === 2
 cs === [3]</code></pre>
+			</section>
+			<section>
+				<h1>Default Values</h1>
+				<ul class="browserList">
+					<li class="none">
+						<img src="images/chrome.png">
+					</li>
+					<li class="nonstandard">
+						<img src="images/firefox.png">
+					</li>
+					<li class="none">
+						<img src="images/ie.png">
+					</li>
+					<li class="none">
+						<img src="images/safari.png">
+					</li>
+					<li class="none">
+						<img src="images/node.svg">
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Default Values</h1>
+				<ul>
+					<li>Fill in missing values during destructuring.</li>
+					<li>Provides defaults for whole patterns or pieces of patterns.</li>
+				</ul>
+<pre class="fragment"><code>let [{ a }] = []; // TypeError</code></pre>
+<pre class="fragment"><code>let [{ a } = {}] = [];
+a === undefined</code></pre>
+<pre class="fragment"><code>let [{ a = 3 } = {}] = [];
+a === 3</code></pre>
+<pre class="fragment"><code>let [{ a = 3 } = {}] = undefined; // TypeError</code></pre>
+<pre class="fragment"><code>let ([{ a = 3 } = {}] = []) = undefined;
+a === 3</code></pre>
 			</section>
 		</div>
 		</div>
